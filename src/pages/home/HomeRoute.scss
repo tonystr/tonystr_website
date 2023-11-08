@@ -9,7 +9,7 @@
 	overflow: hidden;
 }
 
-.planetContainer {
+.planet-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -40,7 +40,16 @@
 	position: relative;
 }
 
-.mainHeading {
+@keyframes text-load-in {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
+
+.main-heading {
 	font-size: 1.3rem;
 	color: #fff;
 	text-align: center;
@@ -53,12 +62,19 @@
 	border: 1px solid #232428;
 
 	span {
-		color: #f0f;
-		font-weight: bold;
+		display: inline-block;
+		animation: text-load-in .14s;
+
+		@for $i from 1 through 14 {
+			&:nth-child(#{$i}) {
+				animation-delay: calc(0.05s * $i);
+			}
+		}
+
 	}
 }
 
-.cursorBlob {
+.cursor-blob {
 	top: -800px;
 	left: 200px;
 	width:  800px;
@@ -72,7 +88,7 @@
 	animation-delay: 5s;
 }
 
-.blurBG {
+.blur-bg {
 	position: absolute;
 	inset: 0;
 	z-index: -7500;
