@@ -1,17 +1,15 @@
 import styles from './HomeRoute.module.scss';
+import IconPlanetDash from '@/assets/planet-dash.svg?react';
 
 export default function HomeRoute() {
     return (
         <div className={styles.home}>
-            <h1>Home</h1>
-            <div
-                style={{
-                    position: 'absolute',
-                }}
-                className={styles.X}
-            >
-                X
-            </div>
+			<div className={styles.planetContainer}>
+				<h1 className={styles.mainHeading}>
+					Tony Strømsnæs
+				</h1>
+				<IconPlanetDash className={styles.planet} />
+			</div>
         </div>
     );
 }
