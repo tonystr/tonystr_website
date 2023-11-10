@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import styles from './HomeRoute.module.scss';
 import './HomeRoute.scss';
 import IconPlanetDash from '@/assets/planet-dash.svg?react';
 import { useRef } from 'react';
@@ -36,7 +35,7 @@ export default function HomeRoute() {
 					<span>æ</span>
 					<span>s</span>
 				</h1>
-				<IconPlanetDash className={styles.planet} />
+				<IconPlanetDash className="planet" />
 			</div>
 			<div
 				className="cursor-blob"
