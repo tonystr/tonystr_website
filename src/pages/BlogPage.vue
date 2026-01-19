@@ -2,7 +2,9 @@
 </script>
 
 <template>
-	<router-view />
+	<div>
+		Hello world
+	</div>
 </template>
 
 <style scoped lang="scss">

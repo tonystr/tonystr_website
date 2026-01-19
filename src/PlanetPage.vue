@@ -5,7 +5,6 @@ import IconPlanetDash from './IconPlanetDash.vue';
 const cursorBlob = ref<null | HTMLDivElement>(null);
 
 watch(cursorBlob, (cursorBlob) => {
-    console.log("cursorBlob", cursorBlob)
 	if (cursorBlob === null) {
 		return;
 	}
