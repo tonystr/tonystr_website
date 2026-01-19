@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import IconPlanetDash from './IconPlanetDash.vue';
 
 const cursorBlob = ref<null | HTMLDivElement>(null);
@@ -15,6 +15,13 @@ watch(cursorBlob, (cursorBlob) => {
 			top: `${e.clientY - 400}px`,
 		}, { duration: 7000, fill: 'forwards' });
 	});
+});
+
+onMounted(() => {
+	document.body.style.overflow = 'hidden';
+});
+onUnmounted(() => {
+	document.body.style.overflow = '';
 });
 </script>
 
