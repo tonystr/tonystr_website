@@ -45,7 +45,20 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 				<div
 					class="article"
 				>
-					<h2>{{ article.displayName ?? article.name }}</h2>
+					<div class="top">
+						<h2 class="title">
+							{{ article.displayName ?? article.name }}
+						</h2>
+						<p class="date">
+							{{ article.timestamp }}
+						</p>
+					</div>
+					<p
+						class="summary"
+						v-if="article.summary"
+					>
+						{{ article.summary }}
+					</p>
 				</div>
 			</a>
 		</div>
@@ -78,6 +91,7 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 .blog-index-page {
 	max-width: 900px;
 	margin: 0 auto;
+	padding: 0 1.6rem;
 
 	h1 {
 		font-size: 2.4rem;
@@ -85,13 +99,40 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 		margin-top: 4rem;
 	}
 
-	h2 {
-		font-size: 1.4rem;
-		font-weight: 400;
+	.article {
+		position: relative;
 
-		&::before {
-			content: '• ';
+		border-left: 2px solid #333337;
+		padding-left: 1rem;
+		margin-top: 1.2rem;
+
+		h2 {
+			margin: 0;
+			margin-right: 1rem;
+			font-size: 1.4rem;
+			font-weight: 400;
 		}
+
+		.top {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.date {
+			padding: 0;
+			margin: 0;
+			color: #aaa;
+		}
+
+		.summary {
+			font-size: 1.04rem;
+			margin: 0;
+			margin-top: .2rem;
+			color: #aaa;
+		};
 	}
 }
 </style>

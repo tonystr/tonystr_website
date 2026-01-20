@@ -114,6 +114,10 @@ watch(markdownRoot, (mdRoot) => {
 	margin-left: calc((100% - 900px) / 2);
 	margin-top: 2rem;
 
+	@media(max-width: 950px) {
+		margin-left: 1.6rem;
+	}
+
 	.back-btn {
 		background-color: transparent;
 		padding: 0;
