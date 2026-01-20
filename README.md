@@ -1,10 +1,8 @@
-# vue-project
-
-This template should help get you started developing with Vue 3 in Vite.
+# tonystr_website
 
 ## Recommended IDE Setup
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[Neovim](https://neovim.io/) + [Volar language server](https://github.com/vuejs/language-tools) (with vtsls & ts_ls).
 
 ## Recommended Browser Setup
 
