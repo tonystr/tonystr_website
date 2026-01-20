@@ -59,10 +59,51 @@ onUnmounted(() => {
 			ref="cursorBlob"
 		/>
 		<div className="blur-bg" />
+		<div class="plus-tl">+</div>
+		<div class="plus-bl">+</div>
+		<div class="plus-tr">+</div>
+		<div class="plus-br">+</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
+$plus_hpad: 1rem;
+$plus_vpad: .6rem;
+
+.plus-tl,
+.plus-bl,
+.plus-tr,
+.plus-br {
+	font-size: 2.5rem;
+	font-weight: 100;
+	color: #666;
+	user-select: none;
+}
+
+.plus-tl {
+	position: absolute;
+	top: $plus_vpad;
+	left: $plus_hpad;
+}
+
+.plus-bl {
+	position: absolute;
+	bottom: $plus_vpad;
+	left: $plus_hpad;
+}
+
+.plus-tr {
+	position: absolute;
+	top: $plus_vpad;
+	right: $plus_hpad;
+}
+
+.plus-br {
+	position: absolute;
+	bottom: $plus_vpad;
+	right: $plus_hpad;
+}
+
 .home {
 	margin: 0;
 	display: flex;

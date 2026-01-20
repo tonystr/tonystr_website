@@ -174,7 +174,6 @@ watch(markdownRoot, (mdRoot) => {
 	}
 	
 	:deep(pre) {
-		// border: 3px solid #303036;
 		background-color: #1e1e22;
 		padding: .6rem 1rem;
 		border-radius: .4rem;
