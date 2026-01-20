@@ -132,7 +132,7 @@ watch(markdownRoot, (mdRoot) => {
 	max-width: 900px;
 	font-size: 1.1rem;
 	margin: 0 auto;
-	padding-bottom: 4rem;
+	padding-bottom: 12rem;
 	line-height: 1.6;
 	
 	:deep(table) {
