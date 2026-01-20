@@ -29,7 +29,6 @@
 },{
     "name": "autotiling",
     "tags": ["tutorial", "terminology", "programming"],
-    "password": "bitflags",
     "thumbnail": "autotiling.thumbnail.png",
     "summary": "Learn to autotile in code",
     "timestamp": 1567288800000

@@ -45,20 +45,29 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 				<div
 					class="article"
 				>
-					<div class="top">
-						<h2 class="title">
-							{{ article.displayName ?? article.name }}
-						</h2>
-						<p class="date">
-							{{ article.timestamp }}
+					<img
+						v-if="article.thumbnail"
+						class="thumbnail"
+						:src="`/data/blog/${article.name}/${article.thumbnail}`"
+						alt=""
+						@error="($event.target as HTMLOrSVGImageElement).classList.add('error')"
+					>
+					<div class="right">
+						<div class="top">
+							<h2 class="title">
+								{{ article.displayName ?? article.name }}
+							</h2>
+							<p class="date">
+								{{ article.timestamp }}
+							</p>
+						</div>
+						<p
+							class="summary"
+							v-if="article.summary"
+						>
+							{{ article.summary }}
 						</p>
 					</div>
-					<p
-						class="summary"
-						v-if="article.summary"
-					>
-						{{ article.summary }}
-					</p>
 				</div>
 			</a>
 		</div>
@@ -105,6 +114,23 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 		border-left: 2px solid #333337;
 		padding-left: 1rem;
 		margin-top: 1.2rem;
+		display: flex;
+
+		.thumbnail {
+			width: 4rem;
+			border-radius: .5rem;
+			display: block;
+			flex-shrink: 0;
+
+			&.error {
+				opacity: 0;
+			}
+		}
+
+		.right {
+			flex-grow: 1;
+			margin-left: 1rem;
+		}
 
 		h2 {
 			margin: 0;

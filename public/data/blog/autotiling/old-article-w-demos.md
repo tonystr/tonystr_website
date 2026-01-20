@@ -1,11 +1,35 @@
 
 # Autotiling
 
-Autotiling is a type of software that automatically figures out which tile graphics belong on each cell of a grid. This is super useful when creating level editors and games with modifiable terrain. For level editors, autotiling allows the user to select a *tilemap*, and then "draw" tiles on a level. The autotile software figures out which graphics belong on each cell you draw to, while you're drawing.
+Autotiling is a type of software that automatically figures out which tile graphics belong on each cell of a grid. This is super useful when creating level editors and games with modifiable terrain. For level editors, autotiling allows the user to select a *tilemap*, and then "draw" tiles on a level. The autotile software figures out which graphics belong on each cell you draw to, while you're drawing. Play around with the interactive autotiling demo below to get a feel for how one implementation works.
 
-Some games that use autotiling are [Terraria](http://terraria.org/), [Super Mario Maker 2](https://www.mariowiki.com/Super_Mario_Maker_2), [Spelunky](https://spelunkyworld.com/), [Stardew Valley](https://www.stardewvalley.net/), [Factorio](https://www.factorio.com/), [Rimworld](https://rimworldgame.com/), [Oxygen Not Included](https://store.steampowered.com/app/457140/Oxygen_Not_Included/), and many more.
+![
+    type='47'
+    defaultTiles={`[
+        [S:3,E:0,S:6,S:23,S:0,S:0,S:17,S:3,E:0,E:5,E:0,S:6,S:23,S:0,S:17,S:2],
+        [E:0,E:15,E:6,S:4,S:0,S:17,S:3,E:3,E:0,E:15,E:10,E:4,S:4,S:17,S:3,E:2],
+        [E:0,E:7,E:12,S:4,S:0,S:1,E:3,E:0,E:15,E:14,S:14,S:44,S:16,S:1,E:3,E:0],
+        [S:9,E:8,S:12,S:16,S:17,S:3,E:0,E:0,E:7,E:3,E:12,S:4,S:0,S:1,E:8,S:12],
+        [S:19,S:8,S:16,S:0,S:1,E:21,S:15,E:0,E:0,E:12,S:12,S:16,S:0,S:19,S:8,S:16],
+        [S:0,S:0,S:0,S:0,S:19,S:9,E:0,E:0,E:0,S:12,S:16,S:0,S:0,S:0,S:0,S:0]
+    ]`}
+](Autotiling.jsx)
+
+Some exemplary games that use autotiling are [Terraria](http://terraria.org/), [Super Mario Maker 2](https://www.mariowiki.com/Super_Mario_Maker_2), [Spelunky](https://spelunkyworld.com/), [Stardew Valley](https://www.stardewvalley.net/), [Factorio](https://www.factorio.com/), [Rimworld](https://rimworldgame.com/), [Oxygen Not Included](https://store.steampowered.com/app/457140/Oxygen_Not_Included/), and many more.
 
 The two most common implementations of autotiling are *16-tile autotiling* and *47-tile autotiling*. 16-tile is easier to implement, and requires less work for the artist who draws the tileset, but 47-tile usually looks better. This article covers both implementations. Here's a demo of 16-tile autotiling, try switching tilesets from the control menu on the right, to see which it works best with.
+
+![
+    type=16
+    defaultTiles={`[
+        [S:3,E:0,S:6,S:0,S:0,S:0,S:0,S:3,E:0,E:0,E:0,S:6,S:0,S:0,S:0,S:2],
+        [E:0,E:0,E:0,S:4,S:0,S:0,S:3,E:0,E:0,E:0,E:0,E:0,S:4,S:0,S:3,E:0],
+        [E:0,E:0,E:0,S:4,S:0,S:1,E:0,E:0,E:0,E:0,S:14,S:8,S:0,S:1,E:0,E:0],
+        [S:9,E:0,S:12,S:0,S:0,S:3,E:0,E:0,E:0,E:0,E:0,S:4,S:0,S:1,E:0,S:12],
+        [S:0,S:8,S:0,S:0,S:1,E:0,S:15,E:0,E:0,E:0,S:12,S:0,S:0,S:0,S:8,S:0],
+        [S:0,S:0,S:0,S:0,S:0,S:9,E:0,E:0,E:0,S:12,S:0,S:0,S:0,S:0,S:0,S:0]
+    ]`}
+](Autotiling.jsx)
 
 ## How tiling works
 
@@ -55,6 +79,26 @@ Differentiating binary from base-10 when writing numbers is really important. Ab
 Where this gets relevant for autotiling, is that you can essentially *encode* information in any number. We established above that autotiling is just a series of *binary* checks (true/false, 1/0), which means we don't need more than a single bit for each of the surrounding tiles. If you're only checking four sides, you only need four bits.
 
 ```js
+// #hidecode
+// #lang=gml
+const x = 0;
+const y = 0;
+
+const check_tile = (x, y) => Math.round(Math.random());
+const show_debug_message = (...args) => console.log(args.join('\n'));
+const string = s => new String(s);
+const bool = a => a ? "true" : "false";
+const format_bits = n => `${n & 1} + ${n & 2} + ${n & 4} + ${n & 8}`;
+const debug_tile_bitflag = bitflag => (
+    "Total bitflag value: " + string(bitflag) + ` (0b${bitflag.toString(2)})` + "\n" +
+    "Bits: " + format_bits(bitflag) + "\n" +
+    "Tile right: " + bool(bitflag & 1) + "\n" +
+    "Tile above: " + bool(bitflag & 8) + "\n" +
+    "Tile left: "  + bool(bitflag & 2) + "\n" +
+    "Tile below: " + bool(bitflag & 4)
+);
+
+// #endhidecode
 // A different random grid is used every time you run this code, hit
 // the play button multiple times to see how the bitflag value changes
 var _index = 0;
@@ -69,9 +113,24 @@ show_debug_message(debug_tile_bitflag(_index));
 
 ## Arranging tileset
 
-Now that you can encode surrounding tile data in a *number*, let's look at numbering the tile graphics. You could just start counting 0, 1, 2, ... from the top-left, however if we want to use the bitflag number from before, we'll have to arrange it in a specific order. First, let's think of the autotiling as looking for *empty* tiles rather than *solid* tiles. Also, let's start with right, then bottom, then left, then top. So, `0b0001` that means tiles all around, except to the right. In that case, we wish to display a border to the right. Then, `0b0010` is tiles all around, expect below. `0b0100` is free only to the left, and finally `0b1000` is border up. However, there are lots more combinations between these numbers. `2`, for example, is `0b0011`. That means there is no tile to the right, *nor* below. In this case we want to display the rounded top-right tile. Later we get to `0b0111`, which is free everywhere except above. In this case, we'll want to display the rounded vertical line bottom.
+Now that you can encode surrounding tile data in a *number*, let's look at numbering the tile graphics. You could just start counting 0, 1, 2, ... from the top-left, however if we want to use the bitflag number from before, we'll have to arrange it in a specific order. First, let's think of the autotiling as looking for *empty* tiles rather than *solid* tiles. Also, let's start with right, then bottom, then left, then top. So, `0b0001` that means tiles all around, except to the right. In that case, we wish to display a border to the right. Then, `0b0010` is tiles all around, expect below. `0b0100` is free only to the left, and finally `0b1000` is border up. However, there are lots more combinations between these numbers. `2`, for example, is `0b0011`. That means there is no tile to the right, *nor* below. In this case we want to display the rounded top-right tile. Later we get to `0b0111`, which is free everywhere except above. In this case, we'll want to display the rounded vertical line bottom. Mark all of the tiles, and you'll end up with this:  
+
+![
+    numbers=true
+    edit=false
+    grid=true
+    type=16
+    defaultTiles={`[
+        [S:12, S:8,  S:9,  S:13],
+        [S:4,  S:0,  S:1,  S:5 ],
+        [S:6,  S:2,  S:3,  S:7 ],
+        [S:14, S:10, S:11, E:16]
+    ]`}
+](Autotiling.jsx)
 
 Let's arrange them from lowest bitflag value to highest. Try to look for some patterns in how they line up.
+
+![src='./images/grass-t16.png'](GrassTileStripImage.jsx)
 
 > This tileset is arranged "*right* **➡**, *down* **⬇**, *left* **⬅**, *up* ⬆", although it might be more natural to instead do "*right* **➡**, *up* ⬆, *left* **⬅**, *down* **⬇**". It doesn't really matter too much which order you do these four directions in, as long as you pick one and stay consistent.
 
@@ -248,13 +307,25 @@ This simply gets the mouse coordinate relative to the grid, checks if it's withi
 > Changed duplicate mouse checks to using bitflag `_mb` (\_mouse_button) and check if cell needs to be changed
 
 ![&nbsp;](./videos/at16_arpash.mp4)
-![An different 16-tile tileset: [Caves Of Gallet](https://adamatomic.itch.io/caves-of-gallet)](./videos/at16_reveen.mp4)
+![An actual decent-looking 16-tile tileset: [Caves Of Gallet](https://adamatomic.itch.io/caves-of-gallet)](./videos/at16_reveen.mp4)
 
 Everything should now be in order for 16-tile autotiling!
 
 ## 47-tile autotiling
 
 So lets look at a more advanced solution. You've seen that the 16-tile solution has a bunch of odd corners with the tileset used in this article. To solve this, you'd want to also check diagonal cells. If we use the same math as before for counting how many different tile sprites we'll need, it's `1 + 2 + 4 + 8 + 16 + 32 + 64 + 128` = `255`! That's a lot of sprites to draw for single tileset. Luckily, this *can* be shortened, but it's not very beautiful. Look at the middle tile in each of the patterns below:
+
+![
+    type='47'
+    defaultTiles={`[
+        [E:0,E:6,E:5,E:36,E:1,E:1,E:1,E:3,E:0,E:5,E:0,E:7,E:36],
+        [E:0,S:14,S:44,S:9,E:12,S:14,S:44,S:9,E:0,S:14,S:44,S:9,E:12],
+        [E:11,E:32,S:6,S:3,E:45,E:7,S:6,S:3,E:15,E:6,S:6,S:36,E:10],
+        [E:9,E:15,E:15,E:30,E:15,S:15,E:0,E:0,E:7,S:15,E:12,S:7,E:6],
+        [E:8,E:15,E:39,E:15,E:3,E:21,E:15,E:0,E:0,E:12,E:15,E:11,E:39]
+    ]`}
+    grid=true
+](Autotiling.jsx)
 
 Notice how this tile stays the same for all three versions. Adding a tile to the top left, bottom left or bottom right, doesn't warrant a different tile in this case. If we find all the cases in which we want to use a tile sprite that already exists, we get a really big, ugly map...
 

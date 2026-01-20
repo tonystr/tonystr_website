@@ -142,9 +142,9 @@ watch(markdownRoot, (mdRoot) => {
 	max-width: 900px;
 	font-size: 1.1rem;
 	margin: 0 auto;
-	padding-bottom: 12rem;
 	line-height: 1.6;
 	padding: 0 1.6rem;
+	padding-bottom: 12rem;
 
 	:deep(table) {
 		width: 900px;
@@ -217,6 +217,7 @@ watch(markdownRoot, (mdRoot) => {
 		border-radius: .4rem;
 		color: #aaaab1;
 		overflow-x: scroll;
+		tab-size: 4;
 
 		> code {
 			padding: 0;
