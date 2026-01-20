@@ -10,11 +10,6 @@ const markdown = ref<null | string>(null);
 const srcRewrite = ref('/data/');
 const markdownRoot = ref<null | HTMLDivElement>(null);
 
-const plugins = [
-	markdownItHighlight,
-	renderMediaCards,
-];
-
 function renderMediaCards(md: any) {
 	md.renderer.rules.image = (tokens: any, index: any) => {
 		const token = tokens[index];
@@ -44,6 +39,11 @@ function renderMediaCards(md: any) {
 	}
 }
 
+const plugins = [
+	markdownItHighlight,
+	renderMediaCards,
+];
+
 onBeforeMount(async () => {
 	srcRewrite.value = `/data/blog/${route.params.article}/`;
 	const res = await fetch(`/data/blog/${route.params.article}/index.md`)
@@ -72,6 +72,12 @@ watch(markdownRoot, (mdRoot) => {
 						node.classList.remove('hovering')
 						video.pause();
 					});
+				}
+
+				const codeBlocks = node.querySelectorAll('pre') as HTMLPreElement[];
+				for (const codeBlock of codeBlocks) {
+					const addLineRegex = /^(?:<span class="hljs-comment">)\/\*add\*\/(?:<\/span>)(.*)$/gm;
+					codeBlock.innerHTML = codeBlock.innerHTML.replace(addLineRegex, '<span class="code-add-line">$1</span>');
 				}
 			}
 		}
@@ -289,6 +295,35 @@ watch(markdownRoot, (mdRoot) => {
 		}
 		.hljs-link {
 			text-decoration:underline
+		}
+		.code-add-line {
+			background-color: #004a30;
+			display: inline-block;
+			margin: 0;
+			width: 100%;
+			position: relative;
+			min-height: 1.76rem;
+
+			&::before {
+				content: '+';
+				color: #aaffbb;
+				position: absolute;
+				left: -1rem;
+				background-color: #004a30;
+				padding-left: .3rem;
+				padding-right: .1rem;
+			}
+
+			&::after {
+				content: '';
+				color: #aaffbb;
+				position: absolute;
+				right: -1rem;
+				height: 1.76rem;
+				background-color: #004a30;
+				padding-left: 1rem;
+
+			}
 		}
 	}
 }

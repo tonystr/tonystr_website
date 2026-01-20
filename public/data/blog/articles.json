@@ -15,7 +15,6 @@
     "name": "json_in_gamemaker",
     "displayName": "Json In Gamemaker",
     "tags": ["tutorial", "gml", "json", "data", "programming"],
-    "password": "json",
     "thumbnail": "json.thumbnail.png",
     "summary": "Learn to efficiently store data for your games",
     "timestamp": "09 Aug 2019"
