@@ -140,11 +140,39 @@ watch(markdownRoot, (mdRoot) => {
 		width: 900px;
 		overflow-x: hidden;
 
-		th {
+		@media(max-width: 800px) {
+			width: 85vw;
 
+			th video, th .gif {
+				width: 40vw !important;
+			}
+		}
+
+		th {
 			.gif,
 			video {
 				width: 400px !important;
+			}
+		}
+	}
+
+	:deep(.image) {
+		width: 700px;
+		margin: 0 auto;
+		padding: 1rem 0;
+
+		img {
+			width: 700px;
+			margin: 0 auto;
+			border-radius: .6rem;
+			display: block;
+		}
+
+		@media(max-width: 800px) {
+			width: 85vw;
+
+			img {
+				width: 85vw;
 			}
 		}
 	}

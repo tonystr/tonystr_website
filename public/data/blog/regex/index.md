@@ -131,7 +131,7 @@ console.log(string.match(/[0-9]+/));
 
 The regex above matches any character between ``1`` and ``9``, repeated one or more times. I say *character* and not *number*, because `[x-y]` is read as any character from x to y according to the order of the character codes. The best way to understand this is to look at an [ASCII](https://en.wikipedia.org/wiki/ASCII) table.
 
-![ASCII Table](ASCIITable.jsx)
+![ASCII Table](./ascii_table.png)
 
 "Dec" is short for "Decimal". The decimal columns represent the *charcode* of each character. "Char" is short for "Character". The regex ``/[0-9]/`` matches any character from character "0" to character "9", sequentially by the ascii table above. The regex ``/[1-_]/`` matches any character from "1" (charcode: 49) to "\_" (charcode: 95). Between "1" and "\_" are some all the numbers except 0, some symbols and all CAPITAL letters, but no lowercase letters.
 
