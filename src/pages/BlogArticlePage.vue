@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import VueMarkdown from 'vue-markdown-render';
-// import markdown from '@/data/blog/regex.md?raw';
 import markdownItHighlight from 'markdown-it-highlight';
 import 'markdown-it-highlight/dist/index.css';
 import { useRoute } from 'vue-router';
-import { nextTick, onBeforeMount, onMounted, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
 
 const route = useRoute();
 
@@ -108,7 +107,7 @@ watch(markdownRoot, (mdRoot) => {
 	padding-bottom: 4rem;
 	line-height: 1.6;
 	
-	::v-deep(table) {
+	:deep(table) {
 		width: 900px;
 		overflow-x: hidden;
 
@@ -121,7 +120,7 @@ watch(markdownRoot, (mdRoot) => {
 		}
 	}
 
-	::v-deep(.gif) {
+	:deep(.gif) {
 		width: 700px;
 		margin: 0 auto;
 		padding: 1rem 0;
@@ -137,7 +136,7 @@ watch(markdownRoot, (mdRoot) => {
 		}
 	}
 	
-	::v-deep(pre) {
+	:deep(pre) {
 		// border: 3px solid #303036;
 		background-color: #303036;
 		padding: .6rem 1rem;
@@ -152,18 +151,17 @@ watch(markdownRoot, (mdRoot) => {
 		}
 	}
 
-	::v-deep(code) {
+	:deep(code) {
 		background-color: #303036;
 		padding: .2rem .3rem;
 		border-radius: .4rem;
 		color: #aaaab1;
 	}
 
-	::v-deep {
-		.hljs {
-			color:#abb2bf;
-			// background:#282c34
-		}
+	:deep(.hljs) {
+		color:#abb2bf;
+		// background:#282c34
+
 		.hljs-comment,
 		.hljs-quote {
 			color:#5c6370;
