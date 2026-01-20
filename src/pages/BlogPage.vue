@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity';
 import { onBeforeMount, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 type Article = {
 	name: string;
@@ -25,6 +28,13 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 
 <template>
 	<div class="blog-index-page">
+		<div class="breadcrumbs">
+			<a href="/">~</a>
+			<div class="separator">&#47;</div>
+			<a href="/blog">blog</a>
+			<div class="separator">&#47;</div>
+			<div class="this-page">{{ route.params.article }}</div>
+		</div>
 		<h1>Latest posts</h1>
 		<div class="articles">
 			<a
@@ -43,4 +53,45 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 </template>
 
 <style scoped lang="scss">
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: .4rem;
+	font-size: 1.04rem;
+	// margin-left: calc((100% - 900px) / 2);
+	margin-top: 2rem;
+
+	.back-btn {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.separator {
+		color: #777;
+	}
+
+	.this-page {
+		color: #aaa;
+	}
+}
+
+.blog-index-page {
+	max-width: 900px;
+	margin: 0 auto;
+
+	h1 {
+		font-size: 2.4rem;
+		font-weight: 600;
+		margin-top: 4rem;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+		font-weight: 400;
+
+		&::before {
+			content: '• ';
+		}
+	}
+}
 </style>
