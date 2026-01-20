@@ -52,6 +52,30 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 						alt=""
 						@error="($event.target as HTMLOrSVGImageElement).classList.add('error')"
 					>
+					<div v-else class="div no-img">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 26"
+							width="42"
+							height="42"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.6"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<!-- Page outline -->
+							<path d="M4 2h10l6 6v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+
+							<!-- Folded corner -->
+							<path d="M13 3v5h6" />
+
+							<!-- Text lines -->
+							<line x1="6" y1="12" x2="15" y2="12" />
+							<line x1="6" y1="16" x2="17" y2="16" />
+							<line x1="6" y1="20" x2="14" y2="20" />
+						</svg>
+					</div>
 					<div class="right">
 						<div class="top">
 							<h2 class="title">
@@ -111,13 +135,22 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 	.article {
 		position: relative;
 
-		border-left: 2px solid #333337;
-		padding-left: 1rem;
+		// border-left: 2px solid #333337;
+		// padding-left: 1rem;
 		margin-top: 1.2rem;
 		display: flex;
 
+		.no-img {
+			width: 4rem;
+			height: 4rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
 		.thumbnail {
 			width: 4rem;
+			height: 4rem;
 			border-radius: .5rem;
 			display: block;
 			flex-shrink: 0;
