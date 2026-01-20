@@ -27,6 +27,13 @@ onUnmounted(() => {
 
 <template>
 	<div className="home">
+		<nav class="floating-nav">
+			<div class="separator">·</div>
+			<a href="./blog">blog</a>
+			<div class="separator">·</div>
+			<a href="https://github.com/tonystr">github</a>
+			<div class="separator">·</div>
+		</nav>
 		<div className="planet-container">
 			<h1 className="main-heading">
 				<span>T</span>
@@ -64,6 +71,26 @@ onUnmounted(() => {
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
+}
+
+.floating-nav {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	gap: .8rem;
+	$width: 11rem;
+	top: 1rem;
+	width: $width;
+	left: calc(50% - $width / 2);
+	text-align: center;
+	padding: .3rem 0;
+	border-radius: .4rem;
+	background: #171717;
+	border: 1px solid #232428;
+
+	.separator {
+		color: #777;
+	}
 }
 
 .planet-container {
