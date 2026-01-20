@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import VueMarkdown from 'vue-markdown-render';
 import markdownItHighlight from 'markdown-it-highlight';
-import 'markdown-it-highlight/dist/index.css';
 import { useRoute } from 'vue-router';
 import { onBeforeMount, ref, watch } from 'vue';
 
@@ -84,6 +83,13 @@ watch(markdownRoot, (mdRoot) => {
 
 <template>
 	<div class="blog-article">
+		<div class="breadcrumbs">
+			<a href="/">~</a>
+			<div class="separator">&#47;</div>
+			<a href="/blog">blog</a>
+			<div class="separator">&#47;</div>
+			<div class="this-page">{{ route.params.article }}</div>
+		</div>
 		<div v-if="markdown === null">Loading...</div>
 		<div
 			class="markdown-root"
@@ -100,6 +106,28 @@ watch(markdownRoot, (mdRoot) => {
 </template>
 
 <style scoped lang="scss">
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: .4rem;
+	font-size: 1.04rem;
+	margin-left: calc((100% - 900px) / 2);
+	margin-top: 2rem;
+
+	.back-btn {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.separator {
+		color: #777;
+	}
+
+	.this-page {
+		color: #aaa;
+	}
+}
+
 .rendered-markdown {
 	max-width: 900px;
 	font-size: 1.1rem;
