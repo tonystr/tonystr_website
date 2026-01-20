@@ -134,7 +134,8 @@ watch(markdownRoot, (mdRoot) => {
 	margin: 0 auto;
 	padding-bottom: 12rem;
 	line-height: 1.6;
-	
+	padding: 0 1.6rem;
+
 	:deep(table) {
 		width: 900px;
 		overflow-x: hidden;
@@ -162,14 +163,23 @@ watch(markdownRoot, (mdRoot) => {
 			width: 700px;
 			border-radius: .6rem;
 		}
+
+		@media(max-width: 800px) {
+			width: 85vw;
+
+			video {
+				width: 85vw;
+			}
+		}
 	}
 	
 	:deep(pre) {
 		// border: 3px solid #303036;
-		background-color: #303036;
+		background-color: #1e1e22;
 		padding: .6rem 1rem;
 		border-radius: .4rem;
 		color: #aaaab1;
+		overflow-x: scroll;
 
 		> code {
 			padding: 0;
