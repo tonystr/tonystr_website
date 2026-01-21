@@ -1,10 +1,9 @@
 [
 	{
 		"name": "git",
-		"displayName": "Git",
-		"summary": "Reflections on git",
-		"timestamp": "20 Jan 2026",
-		"password": "reflog"
+		"displayName": "On git show",
+		"summary": "Reflections on git show",
+		"timestamp": "20 Jan 2026"
 	},
 	{
 		"name": "autotiling",
@@ -15,7 +14,7 @@
 	},
 	{
 		"name": "json_in_gamemaker",
-		"displayName": "Json In Gamemaker",
+		"displayName": "Json in Gamemaker",
 		"tags": ["tutorial", "gml", "json", "data", "programming"],
 		"thumbnail": "json.thumbnail.png",
 		"summary": "Learn to efficiently store data for your games",

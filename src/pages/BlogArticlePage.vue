@@ -89,12 +89,23 @@ watch(markdownRoot, (mdRoot) => {
 
 <template>
 	<div class="blog-article">
-		<div class="breadcrumbs">
-			<a href="/">~</a>
-			<div class="separator">&#47;</div>
-			<a href="/blog">blog</a>
-			<div class="separator">&#47;</div>
-			<div class="this-page">{{ route.params.article }}</div>
+		<div class="split">
+			<div class="breadcrumbs">
+				<a href="/">~</a>
+				<div class="separator">&#47;</div>
+				<a href="/blog">blog</a>
+				<div class="separator">&#47;</div>
+				<div class="this-page">{{ route.params.article }}</div>
+			</div>
+			<div class="right">
+				<a
+					href="/rss.xml"
+					target="_blank"
+					aria-label="RSS feed"
+				>
+					[rss]
+				</a>
+			</div>
 		</div>
 		<div v-if="markdown === null">Loading...</div>
 		<div
@@ -112,13 +123,22 @@ watch(markdownRoot, (mdRoot) => {
 </template>
 
 <style scoped lang="scss">
+.split {
+	font-size: 1.04rem;
+	margin: 0 auto;
+	margin-top: 2rem;
+	max-width: 900px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-center;
+}
+
 .breadcrumbs {
 	display: flex;
 	align-items: center;
 	gap: .4rem;
 	font-size: 1.04rem;
-	margin-left: calc((100% - 900px) / 2);
-	margin-top: 2rem;
 
 	@media(max-width: 950px) {
 		margin-left: 1.6rem;

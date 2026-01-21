@@ -28,12 +28,23 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 
 <template>
 	<div class="blog-index-page">
-		<div class="breadcrumbs">
-			<a href="/">~</a>
-			<div class="separator">&#47;</div>
-			<a href="/blog">blog</a>
-			<div class="separator">&#47;</div>
-			<div class="this-page">{{ route.params.article }}</div>
+		<div class="split">
+			<div class="breadcrumbs">
+				<a href="/">~</a>
+				<div class="separator">&#47;</div>
+				<a href="/blog">blog</a>
+				<div class="separator">&#47;</div>
+				<div class="this-page">{{ route.params.article }}</div>
+			</div>
+			<div class="right">
+				<a
+					href="/rss.xml"
+					target="_blank"
+					aria-label="RSS feed"
+				>
+					[rss]
+				</a>
+			</div>
 		</div>
 		<h1>Latest posts</h1>
 		<div class="articles">
@@ -105,7 +116,6 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 	gap: .4rem;
 	font-size: 1.04rem;
 	// margin-left: calc((100% - 900px) / 2);
-	margin-top: 2rem;
 
 	.back-btn {
 		background-color: transparent;
@@ -125,6 +135,15 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 0 1.6rem;
+	
+	.split {
+		font-size: 1.04rem;
+		margin-top: 2rem;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-center;
+	}
 
 	h1 {
 		font-size: 2.4rem;
