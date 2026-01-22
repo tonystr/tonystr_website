@@ -9,6 +9,11 @@ watch(cursorBlob, (cursorBlob) => {
 		return;
 	}
 
+	cursorBlob.animate({
+		left: `${window.innerWidth / 2 - 400}px`,
+		top: `${0 - 400}px`,
+	}, { duration: 0, fill: 'forwards' });
+
 	document.body.addEventListener('mousemove', (e) => {
 		cursorBlob.animate({
 			left: `${e.clientX - 400}px`,
@@ -26,7 +31,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div className="home">
+	<div class="home">
 		<nav class="floating-nav">
 			<div class="separator">·</div>
 			<a href="./blog">blog</a>
@@ -34,8 +39,8 @@ onUnmounted(() => {
 			<a href="https://github.com/tonystr">github</a>
 			<div class="separator">·</div>
 		</nav>
-		<div className="planet-container">
-			<h1 className="main-heading">
+		<div class="planet-container">
+			<h1 class="main-heading">
 				<span>T</span>
 				<span>o</span>
 				<span>n</span>
@@ -51,14 +56,14 @@ onUnmounted(() => {
 				<span>æ</span>
 				<span>s</span>
 			</h1>
-			<IconPlanetDash className="planet" />
+			<IconPlanetDash class="planet" />
 		</div>
 		<div
-			className="cursor-blob"
+			class="cursor-blob"
 			:data-loaded="cursorBlob !== null"
 			ref="cursorBlob"
 		/>
-		<div className="blur-bg" />
+		<div class="blur-bg" />
 		<div class="plus-tl">+</div>
 		<div class="plus-bl">+</div>
 		<div class="plus-tr">+</div>
@@ -69,6 +74,7 @@ onUnmounted(() => {
 <style scoped lang="scss">
 $plus_hpad: 1rem;
 $plus_vpad: .6rem;
+$glow_color: #18141f;
 
 .plus-tl,
 .plus-bl,
@@ -141,14 +147,15 @@ $plus_vpad: .6rem;
 	align-items: center;
 	position: relative;
 	width: 100%;
+	padding-top: 10rem;
 
 	&::before {
 		content: '';
-		width:  800px;
-		height: 800px;
+		width:  1000px;
+		height: 1000px;
 		position: absolute;
 		z-index: -8000;
-		background: #18141f;
+		background: $glow_color;
 		border-radius: 50%;
 		animation: blob 9s infinite;
 		bottom: -400px;
@@ -157,8 +164,11 @@ $plus_vpad: .6rem;
 	.planet {
 		z-index: -7000;
 		display: block;
-		filter: drop-shadow(0 0 1rem #18141f);
+		box-shadow: inset 0 0 38px #000 ;
 		position: relative;
+		border: 1px solid #000;
+		border-radius: 50%;
+		margin-bottom: -600px;
 
 		@media (max-width: 481px) {
 			width: 600px;
@@ -202,6 +212,19 @@ $plus_vpad: .6rem;
 		}
 
 	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		width: 17rem;
+		height: 2px;
+		background: linear-gradient(to right, #232428, #000);
+		top: 298%;
+		left: -14%;
+		z-index: -5;
+		transform: rotate(90deg);
+
+	}
 }
 
 .cursor-blob {
@@ -211,7 +234,7 @@ $plus_vpad: .6rem;
 	height: 800px;
 	position: absolute;
 	z-index: -8000;
-	background: #18141f;
+	background: $glow_color;
 	border-radius: 50%;
 	animation: blob 14s infinite;
 	bottom: 0;
