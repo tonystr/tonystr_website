@@ -118,6 +118,20 @@ $glow_color: #18141f;
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
+
+
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: -7000;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		background:
+			radial-gradient(2px 2px at 32px 32px, #191919 50%, transparent 51%);
+		background-size: 64px 64px;
+	}
 }
 
 .floating-nav {
