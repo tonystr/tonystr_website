@@ -24,9 +24,13 @@ watch(cursorBlob, (cursorBlob) => {
 
 onMounted(() => {
 	document.body.style.overflow = 'hidden';
+	document.body.style.width = '100vw';
+	document.body.style.height = '100vh';
 });
 onUnmounted(() => {
 	document.body.style.overflow = '';
+	document.body.style.width = '';
+	document.body.style.height = '';
 });
 </script>
 
@@ -115,7 +119,7 @@ $glow_color: #18141f;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
 }
@@ -159,6 +163,11 @@ $glow_color: #18141f;
 		border-radius: 50%;
 		animation: blob 9s infinite;
 		bottom: -400px;
+
+		@media (max-width: 481px) {
+			width: 600px;
+			height: 600px;
+		}
 	}
 
 	.planet {
@@ -170,8 +179,13 @@ $glow_color: #18141f;
 		border-radius: 50%;
 		margin-bottom: -600px;
 
+		@media (max-height: 1090px) {
+			width: 1000px;
+			height: 1000px;
+		}
+
 		@media (max-width: 481px) {
-			width: 600px;
+			margin-bottom: -800px;
 		}
 	}
 }
@@ -197,8 +211,23 @@ $glow_color: #18141f;
 	top: -2rem;
 	border: 1px solid #232428;
 
+	&::before {
+		content: '';
+		position: absolute;
+		width: 2px;
+		height: 16rem;
+		background: linear-gradient(to bottom, #232428, #000);
+		top: 1rem;
+		left: calc(50% - 1px);
+		z-index: -5;
+	}
+
 	@media (max-width: 481px) {
 		top: 2rem;
+
+		&::before {
+			height: 12rem;
+		}
 	}
 
 	span {
@@ -213,18 +242,6 @@ $glow_color: #18141f;
 
 	}
 
-	&::before {
-		content: '';
-		position: absolute;
-		width: 17rem;
-		height: 2px;
-		background: linear-gradient(to right, #232428, #000);
-		top: 298%;
-		left: -14%;
-		z-index: -5;
-		transform: rotate(90deg);
-
-	}
 }
 
 .cursor-blob {
@@ -239,6 +256,10 @@ $glow_color: #18141f;
 	animation: blob 14s infinite;
 	bottom: 0;
 	animation-delay: 5s;
+
+	@media (max-width: 481px) {
+		display: none;
+	}
 }
 
 .blur-bg {
