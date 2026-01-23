@@ -14,7 +14,7 @@ type ArticleMeta = {
 type ArticleContent = {
 	text: string | null;
 	loading: boolean;
-	success: boolean;
+	loaded: boolean;
 }
 
 export const useBlogStore = defineStore('blog', () => {
@@ -42,7 +42,7 @@ export const useBlogStore = defineStore('blog', () => {
 			article.value[name] = {
 				text: null,
 				loading: true,
-				success: false,
+				loaded: false,
 			};
 		}
 		const artRes = await fetch(`/data/blog/${name}/index.md`)
@@ -50,17 +50,22 @@ export const useBlogStore = defineStore('blog', () => {
 		// TODO: Error handling
 		article.value[name].text = artRes;
 		article.value[name].loading = false;
-		article.value[name].success = true;
+		article.value[name].loaded = true;
+	}
+
+	const prefetchArticleContent = async (name: string) => {
+		const existing = article.value[name];
+		if (existing && (existing.loaded || existing.loading)) {
+			return;
+		} 
+		fetchArticleContent(name);
 	}
 
 	const useArticle = (name: string) => {
 		const existing = article.value[name];
-		if (existing) {
-			console.log('Article already loaded.'); 
+		if (existing && existing.loaded) {
 			return existing;
 		}
-
-		console.log('Article not loaded. Loading...');
 
 		fetchArticleContent(name);
 		const newArticleContent = article.value[name];
@@ -69,6 +74,8 @@ export const useBlogStore = defineStore('blog', () => {
 
 	return {
 		articles,
-		useArticle
+		useArticle,
+		fetchArticleContent,
+		prefetchArticleContent,
 	};
 });

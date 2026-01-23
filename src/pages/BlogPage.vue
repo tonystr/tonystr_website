@@ -37,6 +37,7 @@ const filteredArticles = computed(() => {
 				v-for="article in filteredArticles"
 				:key="article.name"
 				:to="`/blog/${article.name}`"
+				@mouseenter="blogStore.prefetchArticleContent(article.name)"
 			>
 				<div
 					class="article"
