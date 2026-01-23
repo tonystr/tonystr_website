@@ -2,12 +2,16 @@
 import VueMarkdown from 'vue-markdown-render';
 import markdownItHighlight from 'markdown-it-highlight';
 import { useRoute } from 'vue-router';
-import { onBeforeMount, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { useBlogStore } from '@/stores/blog';
 
 const route = useRoute();
+const blogStore = useBlogStore();
+const articleContent = blogStore.useArticle(route.params.article as string);
 
-const markdown = ref<null | string>(null);
-const srcRewrite = ref('/data/');
+const markdown = computed(() => articleContent.text);
+const srcRewrite = computed(() => `/data/blog/${route.params.article}/`);
+
 const markdownRoot = ref<null | HTMLDivElement>(null);
 
 function renderMediaCards(md: any) {
@@ -44,12 +48,13 @@ const plugins = [
 	renderMediaCards,
 ];
 
-onBeforeMount(async () => {
-	srcRewrite.value = `/data/blog/${route.params.article}/`;
-	const res = await fetch(`/data/blog/${route.params.article}/index.md`)
-		.then(res => res.text());
-	markdown.value = res;
-});
+
+// onBeforeMount(async () => {
+// 	// srcRewrite.value = `/data/blog/${route.params.article}/`;
+// 	const res = await fetch(`/data/blog/${route.params.article}/index.md`)
+// 		.then(res => res.text());
+// 	markdown.value = res;
+// });
 
 watch(markdownRoot, (mdRoot) => {
 	if (!mdRoot) {
@@ -91,9 +96,9 @@ watch(markdownRoot, (mdRoot) => {
 	<div class="blog-article">
 		<div class="split">
 			<div class="breadcrumbs">
-				<a href="/">~</a>
+				<RouterLink to="/">~</RouterLink>
 				<div class="separator">&#47;</div>
-				<a href="/blog">blog</a>
+				<RouterLink to="/blog">blog</RouterLink>
 				<div class="separator">&#47;</div>
 				<div class="this-page">{{ route.params.article }}</div>
 			</div>

@@ -1,38 +1,23 @@
 <script setup lang="ts">
+import { useBlogStore } from '@/stores/blog';
 import { computed } from '@vue/reactivity';
-import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
+const blogStore = useBlogStore();
 
-type Article = {
-	name: string;
-	displayName?: string;
-	password?: string;
-	thumbnail?: string;
-	timestamp?: any;
-	summary?: string;
-	tags?: string[];
-}
-
-const articles = ref<Article[]>([]);
-
-onBeforeMount(async () => {
-	let res = await fetch('/data/blog/articles.json')
-		.then(res => res.json());
-	articles.value = res;
+const filteredArticles = computed(() => {
+	return blogStore.articles.filter(a => !a?.password)
 });
-
-const filteredArticles = computed(() => articles.value.filter(a => !a?.password));
 </script>
 
 <template>
 	<div class="blog-index-page">
 		<div class="split">
 			<div class="breadcrumbs">
-				<a href="/">~</a>
+				<RouterLink to="/">~</RouterLink>
 				<div class="separator">&#47;</div>
-				<a href="/blog">blog</a>
+				<RouterLink to="/blog">blog</RouterLink>
 				<div class="separator">&#47;</div>
 				<div class="this-page">{{ route.params.article }}</div>
 			</div>
@@ -48,10 +33,10 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 		</div>
 		<h1>Latest posts</h1>
 		<div class="articles">
-			<a
+			<RouterLink
 				v-for="article in filteredArticles"
 				:key="article.name"
-				:href="`/blog/${article.name}`"
+				:to="`/blog/${article.name}`"
 			>
 				<div
 					class="article"
@@ -104,7 +89,7 @@ const filteredArticles = computed(() => articles.value.filter(a => !a?.password)
 						</p>
 					</div>
 				</div>
-			</a>
+			</RouterLink>
 		</div>
 	</div>
 </template>

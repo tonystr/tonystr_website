@@ -2,6 +2,9 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import PlanetPage from './PlanetPage.vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createPinia } from 'pinia';
+
+const pinia = createPinia();
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -25,4 +28,5 @@ const router = createRouter({
 
 createApp(App)
 	.use(router)
+	.use(pinia)
 	.mount('#app');
