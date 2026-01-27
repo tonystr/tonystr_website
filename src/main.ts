@@ -9,10 +9,12 @@ const pinia = createPinia();
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
+		meta: { title: 'TonyStr' },
 		component: PlanetPage,
 	},
 	{
 		path: '/blog',
+		meta: { title: 'TonyStr\'s blog' },
 		component: () => import('./pages/BlogPage.vue'),
 	},
 	{
@@ -24,6 +26,13 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	if (to.meta.title && typeof to.meta.title === 'string') {
+		document.title = to.meta.title;
+	}
+	next();
 });
 
 createApp(App)

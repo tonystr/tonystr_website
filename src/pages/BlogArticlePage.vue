@@ -2,7 +2,7 @@
 import VueMarkdown from 'vue-markdown-render';
 import markdownItHighlight from 'markdown-it-highlight';
 import { useRoute } from 'vue-router';
-import { computed, ref, watch } from 'vue';
+import { computed, onBeforeMount, ref, watch } from 'vue';
 import { useBlogStore } from '@/stores/blog';
 
 const route = useRoute();
@@ -88,6 +88,18 @@ watch(markdownRoot, (mdRoot) => {
 		}
 	});
 	observer.observe(mdRoot, { childList: true, subtree: true });
+});
+
+onBeforeMount(() => {
+	if (articleContent.metadata?.title) {
+		document.title = `${articleContent.metadata.title} | TonyStr's blog`;
+	}
+});
+
+watch(articleContent, content => {
+	if (content.metadata?.title) {
+		document.title = `${content.metadata.title} | TonyStr's blog`;
+	}
 });
 
 </script>
