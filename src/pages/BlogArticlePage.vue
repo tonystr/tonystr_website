@@ -4,6 +4,9 @@ import markdownItHighlight from 'markdown-it-highlight';
 import { useRoute } from 'vue-router';
 import { computed, onBeforeMount, ref, watch } from 'vue';
 import { useBlogStore } from '@/stores/blog';
+import TableOfContents from '@/components/BlogTableOfContents.vue';
+
+const tocContents = ref([]);
 
 const route = useRoute();
 const blogStore = useBlogStore();
@@ -57,6 +60,8 @@ watch(markdownRoot, (mdRoot) => {
 		for (const mutation of mutations) {
 			// @ts-ignore
 			for (const node of mutation.addedNodes) {
+
+				// videos
 				const nodes = node.querySelectorAll('.md-hover-gif');
 				for (const noder of nodes) {
 					const node = noder as HTMLVideoElement;
@@ -71,10 +76,30 @@ watch(markdownRoot, (mdRoot) => {
 					});
 				}
 
+				// codeblocks
 				const codeBlocks = node.querySelectorAll('pre') as HTMLPreElement[];
 				for (const codeBlock of codeBlocks) {
 					const addLineRegex = /^(?:<span class="hljs-comment">)\/\*add\*\/(?:<\/span>)(.*)$/gm;
 					codeBlock.innerHTML = codeBlock.innerHTML.replace(addLineRegex, '<span class="code-add-line">$1</span>');
+				}
+
+				// headings
+				const headings = node.querySelectorAll('h2') as HTMLHeadingElement[];
+				for (const heading of headings) {
+					const title = heading.innerText.trim();
+					heading.id = title;
+					tocContents.value.push({
+						text: title,
+						level: 1,
+						ttt: title,
+					});
+
+					console.log("title", title)
+					console.log("route.hash", route.hash)
+					if (`#${title}` === route.hash) {
+						console.log("TRUE");
+						heading.scrollIntoView({ behavior: 'instant', block: 'start' });
+					}
 				}
 			}
 		}
@@ -98,6 +123,10 @@ watch(articleContent, content => {
 
 <template>
 	<div class="blog-article">
+		<TableOfContents
+			:contents="tocContents"
+			current="hashing"
+		/>
 		<div class="split">
 			<div class="breadcrumbs">
 				<RouterLink to="/">~</RouterLink>
