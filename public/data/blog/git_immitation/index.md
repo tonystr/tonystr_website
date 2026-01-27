@@ -191,3 +191,7 @@ impl Tree {
 This was a fun exercise. It really drove home the idea that [git is just a content-addressable file store](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) (a key-value data store). The hardest part about this project was actually just parsing. If I were to do this again, I would probably use a well-defined language like `yaml` or `json` to store object information.
 
 If you want to look at the code, [it's available on github](https://github.com/tonystr/t-version-control).
+
+
+EDIT:
+This article made it to HackerNews' frontpage. Here is the relevant discussion: [https://news.ycombinator.com/item?id=46778341](https://news.ycombinator.com/item?id=46778341)
