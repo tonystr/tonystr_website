@@ -19,7 +19,7 @@ My first task was to decide on a hashing algoritm. Git uses [SHA-1](https://en.w
 These objects are also compressed to save space, so writing to and reading from `.git/objects/` will always involve running a compression algoritm. Git uses [zlib](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_object_storage) to compress objects, but looking at competitors, [zstd](https://github.com/facebook/zstd/blob/dev/README.md) seemed more promising:
 
 ![zlib vs zstd graph](./zlib_spd.png)
-	> source: [https://facebook.github.io/zstd/](https://facebook.github.io/zstd/)
+> source: [https://facebook.github.io/zstd/](https://facebook.github.io/zstd/)
 
 Since I don't care about git compatibility, I went for zstd. As for the name, I decided on "tvc", short for "Tony's Version Control" - a simple name which inspires trust 🙂. I would use this name for things like `.tvc` (the equivalent of `.git`) and `.tvcignore` (equivalent of `.gitignore`).
 

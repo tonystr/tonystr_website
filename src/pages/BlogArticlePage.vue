@@ -48,14 +48,6 @@ const plugins = [
 	renderMediaCards,
 ];
 
-
-// onBeforeMount(async () => {
-// 	// srcRewrite.value = `/data/blog/${route.params.article}/`;
-// 	const res = await fetch(`/data/blog/${route.params.article}/index.md`)
-// 		.then(res => res.text());
-// 	markdown.value = res;
-// });
-
 watch(markdownRoot, (mdRoot) => {
 	if (!mdRoot) {
 		return;
@@ -200,9 +192,22 @@ watch(articleContent, content => {
 	max-width: 900px;
 	font-size: 1.1rem;
 	margin: 0 auto;
-	line-height: 1.6;
+	line-height: 1.7;
 	padding: 0 1.6rem;
 	padding-bottom: 12rem;
+	margin-top: 5rem;
+	color: #dbdadf;
+
+	:deep(blockquote) {
+		border-left: 3px solid #42a;
+		margin-left: 0;
+		padding-left: 2rem;
+	}
+
+	:deep(h1) {
+		margin-bottom: 2.6rem;
+		font-size: 3rem;
+	}
 
 	:deep(table) {
 		width: 900px;
