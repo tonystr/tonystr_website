@@ -3,6 +3,13 @@
 		<title>TonyStr's blog</title>
 		<link>https://tonystr.net</link>
 		<item>
+			<title>I made my own git</title>
+			<link>https://tonystr.net/blog/git_immitation</link>
+			<guid isPermaLink="true">https://tonystr.net/blog/git_immitation</guid>
+			<description>Implementation and reflections about a git clone</description>
+			<pubDate>27 Jan 2026</pubDate>
+		</item>
+		<item>
 			<title>On git show</title>
 			<link>https://tonystr.net/blog/git</link>
 			<guid isPermaLink="true">https://tonystr.net/blog/git</guid>
