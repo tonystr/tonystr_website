@@ -103,6 +103,11 @@ watch(markdownRoot, (mdRoot) => {
 				<div class="this-page">{{ route.params.article }}</div>
 			</div>
 			<div class="right">
+				<div class="meta">
+					<div v-if="articleContent.metadata?.timestamp" class="date">
+						{{articleContent.metadata.timestamp}}
+					</div>
+				</div>
 				<a
 					href="/rss.xml"
 					target="_blank"
@@ -128,7 +133,7 @@ watch(markdownRoot, (mdRoot) => {
 </template>
 
 <style scoped lang="scss">
-.split {
+.blog-article .split {
 	font-size: 1.04rem;
 	margin: 0 auto;
 	margin-top: 2rem;
@@ -137,6 +142,22 @@ watch(markdownRoot, (mdRoot) => {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-center;
+
+	.right {
+		display: flex;
+		gap: 1.6rem;
+		align-items: center;
+
+		.date {
+			color: #aaa;
+		}
+		
+		a {
+			display: block;
+			align-self: center;
+			padding-bottom: 3px;
+		}
+	}
 }
 
 .breadcrumbs {

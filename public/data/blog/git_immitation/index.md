@@ -1,3 +1,11 @@
+---
+title: I made my own git
+slug: git_immitation
+summary: Implementation and reflections about a git clone
+timestamp: "27 Jan 2026"
+tags: ["git", "programming", "rust"]
+---
+
 # I made my own git
 
 Version control used to be a black box for me; I had no idea how files were stored, how diffs were generated or how commits were structured. Since I love reinventing the wheel, why not take a stab at git?

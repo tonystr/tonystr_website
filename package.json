@@ -12,6 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
+    "js-yaml": "^4.1.1",
     "markdown-it-highlight": "^0.2.0",
     "pinia": "^3.0.4",
     "sass": "^1.97.2",
