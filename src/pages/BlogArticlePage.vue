@@ -51,61 +51,73 @@ const plugins = [
 	renderMediaCards,
 ];
 
-watch(markdownRoot, (mdRoot) => {
+watch([markdownRoot, markdown], ([mdRoot, md], [_, oldMd]) => {
 	if (!mdRoot) {
 		return;
 	}
+
+	console.log('====== triggered watch');
+	console.log(`md: ${md.slice(0, 40)}`);
+
+	if (md != oldMd) {
+		console.log('md changed:');
+		console.log(`old: ${oldMd ? oldMd.slice(0, 40) : oldMd}\n\n, new: ${md.slice(0, 40)}`);
+	}
+
+	renderExtensions(mdRoot);
 
 	const observer = new MutationObserver(mutations => {
 		for (const mutation of mutations) {
 			// @ts-ignore
 			for (const node of mutation.addedNodes) {
-
-				// videos
-				const nodes = node.querySelectorAll('.md-hover-gif');
-				for (const noder of nodes) {
-					const node = noder as HTMLVideoElement;
-					const video = node.querySelector('video');
-					node.addEventListener('mouseenter', () => {
-						node.classList.add('hovering');
-						video.play();
-					});
-					node.addEventListener('mouseleave', () => {
-						node.classList.remove('hovering')
-						video.pause();
-					});
-				}
-
-				// codeblocks
-				const codeBlocks = node.querySelectorAll('pre') as HTMLPreElement[];
-				for (const codeBlock of codeBlocks) {
-					const addLineRegex = /^(?:<span class="hljs-comment">)\/\*add\*\/(?:<\/span>)(.*)$/gm;
-					codeBlock.innerHTML = codeBlock.innerHTML.replace(addLineRegex, '<span class="code-add-line">$1</span>');
-				}
-
-				// headings
-				const headings = node.querySelectorAll('h2') as HTMLHeadingElement[];
-				for (const heading of headings) {
-					const title = heading.innerText.trim();
-					heading.id = title;
-					tocContents.value.push({
-						text: title,
-						level: 1,
-						ttt: title,
-					});
-
-					console.log("title", title)
-					console.log("route.hash", route.hash)
-					if (`#${title}` === route.hash) {
-						console.log("TRUE");
-						heading.scrollIntoView({ behavior: 'instant', block: 'start' });
-					}
-				}
+				renderExtensions(node);
 			}
 		}
 	});
 	observer.observe(mdRoot, { childList: true, subtree: true });
 });
+
+function renderExtensions(node: HTMLElement) {
+	// videos
+	const nodes = Array.from(node.querySelectorAll('.md-hover-gif'));
+	for (const noder of nodes) {
+		const node = noder as HTMLVideoElement;
+		const video = node.querySelector('video');
+		node.addEventListener('mouseenter', () => {
+			node.classList.add('hovering');
+			video.play();
+		});
+		node.addEventListener('mouseleave', () => {
+			node.classList.remove('hovering')
+			video.pause();
+		});
+	}
+
+	// codeblocks
+	const codeBlocks = Array.from(node.querySelectorAll('pre')) as HTMLPreElement[];
+	for (const codeBlock of codeBlocks) {
+		const addLineRegex = /^(?:<span class="hljs-comment">)\/\*add\*\/(?:<\/span>)(.*)$/gm;
+		codeBlock.innerHTML = codeBlock.innerHTML.replace(addLineRegex, '<span class="code-add-line">$1</span>');
+		codeBlock.innerHTML = codeBlock.innerHTML.replace('<span class="code-add-line"></span>', '<span class="code-add-line"> </span>');
+	}
+
+	// headings
+	const headings = Array.from(node.querySelectorAll('h2')) as HTMLHeadingElement[];
+	for (const heading of headings) {
+		const title = heading.innerText.trim();
+		heading.id = title;
+		tocContents.value.push({
+			text: title,
+			level: 1,
+			ttt: title,
+		});
+
+		// TODO: only scrollintoview the first time the content loads, not on all rerenders
+		if (`#${title}` === route.hash) {
+			heading.scrollIntoView({ behavior: 'instant', block: 'start' });
+		}
+	}
+}
 
 onBeforeMount(() => {
 	if (articleContent.metadata?.title) {
@@ -395,7 +407,6 @@ watch(articleContent, content => {
 			margin: 0;
 			width: 100%;
 			position: relative;
-			min-height: 1.76rem;
 
 			&::before {
 				content: '+';
@@ -408,11 +419,10 @@ watch(articleContent, content => {
 			}
 
 			&::after {
-				content: '';
+				content: ' ';
 				color: #aaffbb;
 				position: absolute;
 				right: -1rem;
-				height: 1.76rem;
 				background-color: #004a30;
 				padding-left: 1rem;
 

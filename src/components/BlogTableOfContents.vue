@@ -169,12 +169,12 @@ $c_txt: #dfdfe6;
             background-color: $c_dark;
             border: 3px solid $c_gray;
             left: 0;
-            top: calc(50% - .25rem - 1px);
+            top: calc(50% - .25rem - 2.5px);
         }
 
         &.title {
             margin-bottom: .65rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             height: 1.6rem;
 			text-wrap: nowrap;
@@ -192,7 +192,7 @@ $c_txt: #dfdfe6;
 
 			&::before {
 				background-color: transparent;
-				border-color: #7591d4;
+				border-color: #7581d4;
 			}
 		}
     }
