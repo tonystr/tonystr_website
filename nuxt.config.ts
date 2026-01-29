@@ -1,0 +1,73 @@
+import { fileURLToPath } from 'url';
+
+export default defineNuxtConfig({
+	$production: {
+		// routeRules: {
+		// 	'/**': { isr: true }
+		// }
+	},
+	$development: {
+	},
+	$env: {
+		staging: {
+		}
+	},
+
+	vite: {
+		resolve: {
+			alias: {
+				'@': fileURLToPath(new URL('./', import.meta.url)),
+			},
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					// api: 'modern-compiler'
+				}
+			}
+		}
+	},
+
+	typescript: {
+		sharedTsConfig: {
+			"extends": "./.nuxt/tsconfig.json",
+			"compilerOptions": {
+				"baseUrl": ".",
+				"paths": {
+					"@/*": ["./src/*"]
+				}
+			},
+			"exclude": ["node_modules", "dist"]
+		},
+	},
+
+	css: [
+		'~/src/index.css'
+	],
+
+	modules: ['@pinia/nuxt'],
+
+	app: {
+		head: {
+			htmlAttrs: {
+				lang: 'en',
+			},
+			meta: [
+				{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+				{ name: 'description', content: 'Personal home page of Tony' },
+				{ name: 'robots', content: 'index, follow' },
+				// { name: 'msvalidate.01', content: 'BF3CD10C85056390DBB5884682A1E8DE' },
+				{ property: 'og:title', content: 'TonyStr.net' },
+				{ property: 'og:description', content: 'Personal home page of Tony' },
+				{ property: 'og:site_name', content: 'TonyStr' },
+				// { property: 'og:image', content: 'https://soundshop.io/banner.png' },
+				// { name: 'twitter:card', content: 'summary_large_image' },
+				{ name: 'twitter:title', content: 'TonyStr.net' },
+				{ name: 'twitter:description', content: 'Personal home page of Tony' },
+				// { name: 'twitter:image', content: 'https://soundshop.io/banner.png' },
+				{ name: 'msapplication-TileColor', content: '#13121b' },
+				{ name: 'theme-color', content: '#13121b' }
+			]
+		}
+	}
+});

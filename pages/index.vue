@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
-import IconPlanetDash from './IconPlanetDash.vue';
 
 const cursorBlob = ref<null | HTMLDivElement>(null);
 

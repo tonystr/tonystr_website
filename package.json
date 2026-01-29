@@ -1,29 +1,34 @@
 {
-  "name": "vue-project",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@vercel/analytics": "^1.6.1",
-    "js-yaml": "^4.1.1",
-    "markdown-it-highlight": "^0.2.0",
-    "pinia": "^3.0.4",
-    "sass": "^1.97.2",
-    "vue": "^3.5.26",
-    "vue-markdown-render": "^2.3.0",
-    "vue-router": "^4.6.4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.3",
-    "vite": "^7.3.0",
-    "vite-plugin-vue-devtools": "^8.0.5"
-  }
+	"name": "tonystr_website",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"engines": {
+		"node": "^20.19.0 || >=22.12.0"
+	},
+	"scripts": {
+		"dev": "nuxt dev",
+		"build": "nuxt build",
+		"preview": "nuxt preview",
+		"generate": "nuxt generate",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"@pinia/nuxt": "^0.11.3",
+		"@vercel/analytics": "^1.6.1",
+		"js-yaml": "^4.1.1",
+		"markdown-it-highlight": "^0.2.0",
+		"nuxt": "^4.3.0",
+		"pinia": "^3.0.4",
+		"sass": "^1.97.2",
+		"vue": "^3.5.26",
+		"vue-markdown-render": "^2.3.0",
+		"vue-router": "^4.6.4"
+	},
+	"devDependencies": {
+		"@types/node": "^25.1.0",
+		"@vitejs/plugin-vue": "^6.0.3",
+		"vite": "^7.3.0",
+		"vite-plugin-vue-devtools": "^8.0.5"
+	}
 }
