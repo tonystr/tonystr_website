@@ -14,8 +14,11 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
+		"@nuxt/content": "^3.11.0",
+		"@nuxt/image": "^2.0.0",
 		"@pinia/nuxt": "^0.11.3",
 		"@vercel/analytics": "^1.6.1",
+		"better-sqlite3": "^12.6.2",
 		"js-yaml": "^4.1.1",
 		"markdown-it-highlight": "^0.2.0",
 		"nuxt": "^4.3.0",

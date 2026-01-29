@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { useBlogStore } from '@/stores/blog';
-import { computed } from '@vue/reactivity';
-import { useRoute } from 'vue-router';
 
+const { data } = await useAsyncData('blog_index', () => queryCollection('blog')
+	.where('path', 'NOT LIKE', '/blog/%/_%')
+	.order('date', 'DESC')
+	.all());
 const route = useRoute();
-const blogStore = useBlogStore();
-
-const filteredArticles = computed(() => {
-	return blogStore.articles.filter(a => !a?.password)
-});
+// console.log("data", data.value)
+const filteredArticles = data.value?.map(a => ({
+	path: a.path,
+	blogPath: a.path.slice(6),
+	title: a.title,
+	summary: a.description,
+	date: a.date,
+	thumbnail: a.meta.thumbnail,
+	tags: a.meta.tags
+}));
 </script>
 
 <template>
@@ -33,22 +39,20 @@ const filteredArticles = computed(() => {
 		</div>
 		<h1>Latest posts</h1>
 		<div class="articles">
-			<RouterLink
+			<NuxtLink
 				v-for="article in filteredArticles"
-				:key="article.name"
-				:to="`/blog/${article.name}`"
-				@mouseenter="blogStore.prefetchArticleContent(article.name)"
+				:key="article.path"
+				:to="article.path"
 			>
 				<div
 					class="article"
 				>
-					<img
+					<NuxtImg
 						v-if="article.thumbnail"
+						:src="`${article.blogPath}/${article.thumbnail as string}`"
 						class="thumbnail"
-						:src="`/data/blog/${article.name}/${article.thumbnail}`"
 						alt=""
-						@error="($event.target as HTMLOrSVGImageElement).classList.add('error')"
-					>
+					/>
 					<div v-else class="div no-img">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -76,10 +80,10 @@ const filteredArticles = computed(() => {
 					<div class="right">
 						<div class="top">
 							<h2 class="title">
-								{{ article.displayName ?? article.name }}
+								{{ article.title ?? article.path }}
 							</h2>
 							<p class="date">
-								{{ article.timestamp }}
+								{{ article.date }}
 							</p>
 						</div>
 						<p
@@ -90,7 +94,7 @@ const filteredArticles = computed(() => {
 						</p>
 					</div>
 				</div>
-			</RouterLink>
+			</NuxtLink>
 		</div>
 	</div>
 </template>
@@ -151,6 +155,7 @@ const filteredArticles = computed(() => {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			flex-shrink: 0;
 		}
 
 		.thumbnail {

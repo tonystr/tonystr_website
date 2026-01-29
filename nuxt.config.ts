@@ -1,6 +1,8 @@
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
 export default defineNuxtConfig({
+	compatibilityDate: '2026-01-29',
+
 	$production: {
 		// routeRules: {
 		// 	'/**': { isr: true }
@@ -13,16 +15,23 @@ export default defineNuxtConfig({
 		}
 	},
 
-	vite: {
-		resolve: {
-			alias: {
-				'@': fileURLToPath(new URL('./', import.meta.url)),
-			},
-		},
-		css: {
-			preprocessorOptions: {
-				scss: {
-					// api: 'modern-compiler'
+	content: {
+		build: {
+			markdown: {
+				highlight: {
+					theme: 'kanagawa-wave',
+					langs: [
+						'rust',
+						'javascript',
+						'js',
+						'typescript',
+						'ts',
+						'bash',
+						'markdown',
+						'json',
+						'c',
+						'cs',
+					]
 				}
 			}
 		}
@@ -45,7 +54,11 @@ export default defineNuxtConfig({
 		'~/src/index.css'
 	],
 
-	modules: ['@pinia/nuxt'],
+	modules: [
+		'@pinia/nuxt',
+		'@nuxt/content',
+		'@nuxt/image',
+	],
 
 	app: {
 		head: {
