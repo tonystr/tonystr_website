@@ -31,13 +31,17 @@ onUnmounted(() => {
 	document.body.style.width = '';
 	document.body.style.height = '';
 });
+
+useSeoMeta({
+	title: 'TonyStr.net',
+});
 </script>
 
 <template>
 	<div class="home">
 		<nav class="floating-nav">
 			<div class="separator">·</div>
-			<RouterLink to="./blog">blog</RouterLink>
+			<NuxtLink to="./blog">blog</NuxtLink>
 			<div class="separator">·</div>
 			<a href="https://github.com/tonystr">github</a>
 			<div class="separator">·</div>

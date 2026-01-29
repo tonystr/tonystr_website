@@ -1,20 +1,24 @@
 <script setup lang="ts">
-
 const { data } = await useAsyncData('blog_index', () => queryCollection('blog')
+	// Exclude articles starting with underscore
 	.where('path', 'NOT LIKE', '/blog/%/_%')
 	.order('date', 'DESC')
 	.all());
 const route = useRoute();
-// console.log("data", data.value)
 const filteredArticles = data.value?.map(a => ({
-	path: a.path,
-	blogPath: a.path.slice(6),
-	title: a.title,
-	summary: a.description,
-	date: a.date,
+	path:      a.path,
+	blogPath:  a.path.slice(6), // remove `/blog/`
+	title:     a.title,
+	summary:   a.description,
+	date:      a.date,
 	thumbnail: a.meta.thumbnail,
-	tags: a.meta.tags
+	tags:      a.meta.tags
 }));
+
+useSeoMeta({
+	title: 'TonyStr\'s blog',
+	description: 'Latest posts from TonyStr. Subscribe on RSS',
+});
 </script>
 
 <template>

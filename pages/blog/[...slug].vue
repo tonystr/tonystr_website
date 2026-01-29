@@ -16,6 +16,11 @@ function formatDate(dateStr: string) {
 		year: 'numeric',
 	});
 }
+
+useSeoMeta({
+	title: `${data.value?.title} | TonyStr's blog`,
+	description: data.value?.description,
+});
 </script>
 
 <template>
