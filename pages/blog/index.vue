@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const { data } = await useAsyncData('blog_index', () => queryCollection('blog')
-	// Exclude articles starting with underscore
-	.where('path', 'NOT LIKE', '/blog/%/_%')
-	.order('date', 'DESC')
-	.all());
-const route = useRoute();
+const { data } = await useAsyncData(
+	'blog_index', 
+	() => queryCollection('blog')
+		// Exclude articles starting with underscore
+		.where('path', 'NOT LIKE', '/blog/%/_%')
+		.order('date', 'DESC')
+		.all(),
+	{ lazy: true }
+);
 const filteredArticles = computed(() => data.value?.map(a => ({
 	path:      a.path,
 	blogPath:  a.path.slice(6), // remove `/blog/`
@@ -29,7 +32,6 @@ useSeoMeta({
 				<div class="separator">&#47;</div>
 				<RouterLink to="/blog">blog</RouterLink>
 				<div class="separator">&#47;</div>
-				<div class="this-page">{{ route.params.article }}</div>
 			</div>
 			<div class="right">
 				<a
