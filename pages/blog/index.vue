@@ -85,9 +85,9 @@ useSeoMeta({
 						</div>
 						<p
 							class="summary"
-							v-if="article.meta.summary"
+							v-if="article.description"
 						>
-							{{ article.meta.summary }}
+							{{ article.description }}
 						</p>
 					</div>
 				</div>
