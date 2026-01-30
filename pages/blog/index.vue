@@ -5,7 +5,7 @@ const { data } = await useAsyncData('blog_index', () => queryCollection('blog')
 	.order('date', 'DESC')
 	.all());
 const route = useRoute();
-const filteredArticles = data.value?.map(a => ({
+const filteredArticles = computed(() => data.value?.map(a => ({
 	path:      a.path,
 	blogPath:  a.path.slice(6), // remove `/blog/`
 	title:     a.title,
@@ -13,7 +13,7 @@ const filteredArticles = data.value?.map(a => ({
 	date:      a.date,
 	thumbnail: a.meta.thumbnail,
 	tags:      a.meta.tags
-}));
+})));
 
 useSeoMeta({
 	title: 'TonyStr\'s blog',
