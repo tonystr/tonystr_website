@@ -18,7 +18,7 @@ function formatDate(dateStr: string) {
 }
 
 definePageMeta({
-	documentDriven: { page: false, surround: false, },
+	documentDriven: true,
 });
 
 useSeoMeta({
