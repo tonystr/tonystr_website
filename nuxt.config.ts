@@ -1,14 +1,11 @@
-// import { fileURLToPath } from 'url';
-
-import { readFileSync } from "node:fs";
-
 export default defineNuxtConfig({
 	compatibilityDate: '2026-01-29',
 
 	$production: {
-		// routeRules: {
-		// 	'/**': { isr: true }
-		// }
+		routeRules: {
+			'/blog': { prerender: true, swr: 900 },
+			'/blog/**': { prerender: true, swr: 900 },
+		}
 	},
 	$development: {
 	},
