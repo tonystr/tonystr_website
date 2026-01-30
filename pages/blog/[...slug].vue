@@ -2,9 +2,12 @@
 import { useAsyncData } from 'nuxt/app';
 
 const route = useRoute();
-const { data } = await useAsyncData(route.path, () => queryCollection('blog')
-	.path(route.path)
-	.first());
+const { data } = await useAsyncData(
+	() => `post:${route.path}`,
+	() => queryCollection('blog')
+		.path(route.path)
+		.first()
+);
 
 const articleSlug = computed(() => route.params.slug?.[0]);
 
