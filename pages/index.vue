@@ -43,7 +43,7 @@ useSeoMeta({
 			<div class="separator">·</div>
 			<NuxtLink to="./blog">blog</NuxtLink>
 			<div class="separator">·</div>
-			<a href="https://github.com/tonystr">github</a>
+			<NuxtLink to="https://github.com/tonystr">github</NuxtLink>
 			<div class="separator">·</div>
 		</nav>
 		<div class="planet-container">

@@ -1,5 +1,7 @@
 // import { fileURLToPath } from 'url';
 
+import { readFileSync } from "node:fs";
+
 export default defineNuxtConfig({
 	compatibilityDate: '2026-01-29',
 
@@ -31,9 +33,9 @@ export default defineNuxtConfig({
 						'json',
 						'c',
 						'cs',
-					]
+					],
 				}
-			}
+			},
 		}
 	},
 
@@ -59,6 +61,17 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@nuxt/image',
 	],
+
+	// hooks: {
+	// 	'content:file:beforeParse': (ctx: any) => {
+	// 		const { file } = ctx;
+	// 		console.log('BEFORE PARSE');
+	//
+	// 		if (file.id.endsWith('.md')) {
+	// 			file.body = file.body.replace(/^\/\*add\*\/(.*)$/gm, '<span class="code-add-line">$1</span>');
+	// 		}
+	// 	}
+	// },
 
 	app: {
 		head: {

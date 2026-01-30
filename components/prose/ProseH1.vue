@@ -7,12 +7,12 @@ const generate = computed(() => props.id && ((typeof headings?.anchorLinks === '
 
 <template>
 	<h1 :id="props.id">
-		<a
+		<NuxtLink
 			v-if="props.id && generate"
-			:href="`#${props.id}`"
+			:to="`#${props.id}`"
 		>
 			<slot />
-		</a>
+		</NuxtLink>
 		<slot v-else />
 	</h1>
 </template>

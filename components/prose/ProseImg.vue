@@ -20,9 +20,25 @@ const props = defineProps({
 	},
 })
 
+// const mediaType = 'image';
+// const refinedSrc = './';
+
 const route = useRoute();
 const videoRegex = /\.mp4$|\.gif$/;
-const mediaType = computed(() => props.src && videoRegex.test(props.src) ? 'video' : 'image');
+const imageRegex = /\.png$|\.jpe?g$|\.gif$|\.webp$/;
+const mediaType = computed(() => {
+	if (props.src) {
+		if (videoRegex.test(props.src)) {
+			return 'video';
+		}
+
+		if (imageRegex.test(props.src)) {
+			return 'image';
+		}
+	}
+
+	return 'other';
+});
 
 const refinedSrc = computed(() => {
 	if (props.src?.startsWith('/') && !props.src.startsWith('//')) {
@@ -34,6 +50,7 @@ const refinedSrc = computed(() => {
 
 	if (props.src?.startsWith('./')) {
 		const path = route.path.split('/').at(-1);
+		// const path = '/git_immitation/'
 		if (!path || typeof path !== 'string') {
 			console.error(`failed to parse path for proseimg: ${path}`);
 			return props.src;
@@ -45,47 +62,33 @@ const refinedSrc = computed(() => {
 </script>
 
 <template>
-	<div :class="mediaType">
-		<NuxtImg
-			v-if="mediaType === 'image'"
-			:src="refinedSrc"
-			:alt="props.alt"
-			:width="props.width"
-			:height="props.height"
-		/>
-		<div
-			v-else-if="mediaType === 'video'"
-			class="gif md-hover-gif"
-		>
-			<video
-				loop
-				:width="props.width"
-				:height="props.height"
-				@mouseenter="event => (event?.target as HTMLVideoElement).play()"
-				@mouseleave="event => (event?.target as HTMLVideoElement).pause()"
-			>
-				<source :src="`/${refinedSrc}`" type="video/mp4">
-				{{ props.alt }}
-			</video>
-		</div>
-		<div v-else class="error">
-			Failed to load media
-		</div>
-	</div>
+	<NuxtImg
+		v-if="mediaType === 'image'"
+		:src="refinedSrc"
+		:alt="props.alt"
+		:width="props.width"
+		:height="props.height"
+	/>
+	<video
+		v-else-if="mediaType === 'video'"
+		loop
+		:width="props.width"
+		:height="props.height"
+		@mouseenter="event => (event?.target as HTMLVideoElement).play()"
+		@mouseleave="event => (event?.target as HTMLVideoElement).pause()"
+	>
+		<source :src="`/${refinedSrc}`" type="video/mp4">
+		{{ props.alt }}
+	</video>
+	<slot v-else />
 </template>
 
-<style lang="scss">
-.image {
+<style scoped lang="scss">
+img {
 	width: 700px;
-	margin: 0 auto;
-	padding: 1rem 0;
-
-	img {
-		width: 700px;
-		margin: 0 auto;
-		border-radius: .6rem;
-		display: block;
-	}
+	margin: 2.6rem auto;
+	border-radius: .6rem;
+	display: block;
 
 	@media(max-width: 800px) {
 		width: 85vw;
@@ -96,19 +99,16 @@ const refinedSrc = computed(() => {
 	}
 }
 
-.gif {
+
+video {
 	width: 700px;
-	margin: 0 auto;
-	padding: 1rem 0;
+	display: block;
+	margin: 1.6rem auto;
 	transition: transform .2s;
+	border-radius: .6rem;
 
 	&:hover {
 		transform: scale(1.06);
-	}
-
-	video {
-		width: 700px;
-		border-radius: .6rem;
 	}
 
 	@media(max-width: 800px) {
