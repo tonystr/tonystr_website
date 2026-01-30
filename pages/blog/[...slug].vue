@@ -17,6 +17,10 @@ function formatDate(dateStr: string) {
 	});
 }
 
+definePageMeta({
+	documentDriven: { page: false, surround: false, },
+});
+
 useSeoMeta({
 	title: `${data.value?.title} | TonyStr's blog`,
 	description: data.value?.description,

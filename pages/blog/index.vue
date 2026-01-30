@@ -9,6 +9,10 @@ const { data: articles } = await useAsyncData(
 		.all(),
 );
 
+definePageMeta({
+	documentDriven: { page: false, surround: false, },
+});
+
 useSeoMeta({
 	title: 'TonyStr\'s blog',
 	description: 'Latest posts from TonyStr. Subscribe on RSS',
