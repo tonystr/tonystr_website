@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const { data: articles } = await useAsyncData(
 	'blog_index', 
+	// @ts-ignore
 	() => queryCollection('blog')
 		// Exclude articles starting with underscore
 		.where('path', 'NOT LIKE', '/blog/%/_%')
 		.order('date', 'DESC')
-		.all()
+		.all(),
 );
 
 useSeoMeta({
