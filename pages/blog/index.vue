@@ -1,22 +1,12 @@
 <script setup lang="ts">
-const { data } = await useAsyncData(
+const { data: articles } = await useAsyncData(
 	'blog_index', 
 	() => queryCollection('blog')
 		// Exclude articles starting with underscore
 		.where('path', 'NOT LIKE', '/blog/%/_%')
 		.order('date', 'DESC')
-		.all(),
-	{ lazy: true }
+		.all()
 );
-const filteredArticles = computed(() => data.value?.map(a => ({
-	path:      a.path,
-	blogPath:  a.path.slice(6), // remove `/blog/`
-	title:     a.title,
-	summary:   a.description,
-	date:      a.date,
-	thumbnail: a.meta.thumbnail,
-	tags:      a.meta.tags
-})));
 
 useSeoMeta({
 	title: 'TonyStr\'s blog',
@@ -46,7 +36,7 @@ useSeoMeta({
 		<h1>Latest posts</h1>
 		<div class="articles">
 			<NuxtLink
-				v-for="article in filteredArticles"
+				v-for="article in articles"
 				:key="article.path"
 				:to="article.path"
 			>
@@ -54,8 +44,8 @@ useSeoMeta({
 					class="article"
 				>
 					<NuxtImg
-						v-if="article.thumbnail"
-						:src="`${article.blogPath}/${article.thumbnail as string}`"
+						v-if="article.meta.thumbnail"
+						:src="`${article.path.slice(6)}/${article.meta.thumbnail as string}`"
 						class="thumbnail"
 						alt=""
 					/>
@@ -94,9 +84,9 @@ useSeoMeta({
 						</div>
 						<p
 							class="summary"
-							v-if="article.summary"
+							v-if="article.meta.summary"
 						>
-							{{ article.summary }}
+							{{ article.meta.summary }}
 						</p>
 					</div>
 				</div>
