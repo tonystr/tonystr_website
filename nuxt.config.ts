@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-	compatibilityDate: '2026-01-29',
+	compatibilityDate: '2026-01-30',
 
 	$production: {
 		routeRules: {
@@ -15,6 +15,7 @@ export default defineNuxtConfig({
 	},
 
 	content: {
+		// This is needed for hosting on vercel!!!
 		experimental: { sqliteConnector: 'native' },
 		build: {
 			markdown: {
@@ -51,7 +52,8 @@ export default defineNuxtConfig({
 	},
 
 	css: [
-		'~/src/index.css'
+		'~/assets/style.css',
+		'~/assets/fonts/inter.css'
 	],
 
 	modules: [
