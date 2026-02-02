@@ -38,17 +38,23 @@ useSeoMeta({
 			</div>
 			<div class="right">
 				<div class="meta">
-					<div v-if="data?.date" class="date">
-						{{formatDate(data.date)}}
-					</div>
+					<NuxtTime
+						v-if="data?.date"
+						:datetime="data.date"
+						year="numeric"
+						month="short"
+						day="2-digit"
+						class="date"
+					/>
 				</div>
-				<a
-					href="/rss.xml"
+				<NuxtLink
+					to="/rss.xml"
 					target="_blank"
 					aria-label="RSS feed"
+					external
 				>
 					[rss]
-				</a>
+				</NuxtLink>
 			</div>
 		</div>
 		<ContentRenderer
@@ -71,17 +77,23 @@ useSeoMeta({
 				</div>
 				<div class="right">
 					<div class="meta">
-						<div v-if="data?.date" class="date">
-							{{formatDate(data.date)}}
-						</div>
+						<NuxtTime
+							v-if="data?.date"
+							:datetime="data.date"
+							year="numeric"
+							month="short"
+							day="2-digit"
+							class="date"
+						/>
 					</div>
-					<a
-						href="/rss.xml"
+					<NuxtLink
+						to="/rss.xml"
 						target="_blank"
 						aria-label="RSS feed"
+						external
 					>
 						[rss]
-					</a>
+					</NuxtLink>
 				</div>
 			</div>
 		</footer>

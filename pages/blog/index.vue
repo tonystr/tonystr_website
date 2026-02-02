@@ -24,13 +24,14 @@ useSeoMeta({
 				<div class="separator">&#47;</div>
 			</div>
 			<div class="right">
-				<a
-					href="/rss.xml"
+				<NuxtLink
+					to="/rss.xml"
 					target="_blank"
 					aria-label="RSS feed"
+					external
 				>
 					[rss]
-				</a>
+				</NuxtLink>
 			</div>
 		</div>
 		<h1>Latest posts</h1>
@@ -79,7 +80,14 @@ useSeoMeta({
 								{{ article.title ?? article.path }}
 							</h2>
 							<p class="date">
-								{{ article.date }}
+								<NuxtTime
+									v-if="article.date"
+									:datetime="article.date"
+									year="numeric"
+									month="short"
+									day="2-digit"
+									class="date"
+								/>
 							</p>
 						</div>
 						<p
