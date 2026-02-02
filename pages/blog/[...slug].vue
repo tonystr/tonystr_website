@@ -56,7 +56,35 @@ useSeoMeta({
 			class="rendered-markdown"
 			:value="data"
 		/>
-		<div v-else>Page not found</div>
+		<div v-else class="page-not-found">
+			<div class="code-404">404</div>
+			Page not found
+		</div>
+		<footer>
+			<div class="split">
+				<div class="breadcrumbs">
+					<NuxtLink to="/">~</NuxtLink>
+					<div class="separator">&#47;</div>
+					<NuxtLink to="/blog">blog</NuxtLink>
+					<div class="separator">&#47;</div>
+					<div class="this-page">{{ articleSlug }}</div>
+				</div>
+				<div class="right">
+					<div class="meta">
+						<div v-if="data?.date" class="date">
+							{{formatDate(data.date)}}
+						</div>
+					</div>
+					<a
+						href="/rss.xml"
+						target="_blank"
+						aria-label="RSS feed"
+					>
+						[rss]
+					</a>
+				</div>
+			</div>
+		</footer>
 	</div>
 </template>
 
@@ -112,14 +140,39 @@ useSeoMeta({
 	}
 }
 
+footer {
+	padding-bottom: 7rem;
+	border-top: 2px solid #333;
+	width: 900px;
+	margin: 0 auto;
+	margin-top: 8rem;
+	padding-top: 0rem;
+	height: 1px;
+}
+
 .rendered-markdown {
 	max-width: 900px;
 	font-size: 1.1rem;
 	margin: 0 auto;
 	line-height: 1.7;
 	padding: 0 1.6rem;
-	padding-bottom: 12rem;
 	margin-top: 5rem;
 	color: #dbdadf;
+}
+
+.page-not-found {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 2rem;
+	font-weight: 600;
+
+	.code-404 {
+		font-size: 5rem;
+		font-weight: 800;
+		margin-top: 8rem;
+	}
 }
 </style>
