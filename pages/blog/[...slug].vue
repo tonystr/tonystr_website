@@ -11,15 +11,6 @@ const { data } = await useAsyncData(
 
 const articleSlug = computed(() => route.params.slug?.[0]);
 
-function formatDate(dateStr: string) {
-	const date = new Date(dateStr);
-	return date.toLocaleDateString('en-GB', {
-		day: 'numeric',
-		month: 'short',
-		year: 'numeric',
-	});
-}
-
 useSeoMeta({
 	title: `${data.value?.title} | TonyStr's blog`,
 	description: data.value?.description,
@@ -170,6 +161,10 @@ footer {
 	padding: 0 1.6rem;
 	margin-top: 5rem;
 	color: #dbdadf;
+
+	:deep(hr) {
+		color: #333;
+	}
 }
 
 .page-not-found {

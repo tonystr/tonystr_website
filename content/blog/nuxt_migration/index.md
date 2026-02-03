@@ -1,6 +1,6 @@
 ---
 date: 2026-01-30
-description: migrating my website to nuxt
+description: Migrating my website to nuxt
 ---
 # Migrating to nuxt
 
