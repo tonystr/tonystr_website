@@ -4,7 +4,7 @@ description: A collections of vim anecdotes from the internet
 ---
 # Vim anecdotes
 
-Programmers have an unquenchable thirst for discussions about tools and technology. I've participated in my share of editor and framework discussions, perhaps too much. I've begun noticing patterns — the same arguments show up repeatedly, which begets much of the same respones.
+Programmers have an unquenchable thirst for discussions about tools and technology. I've participated in my share of editor and framework discussions, perhaps too much. I've begun noticing patterns — the same arguments show up repeatedly, which begets much of the same responses.
 
 There is no surer trigger for discussions than vim. Just uttering it's name causes both fanatics and iconoclasts to crawl out of the dark to engage in ideological wrestling matches. So much brain power is spent on defending or defaming vim. I've been watching these exchanges, taking note of my favorite anecdotes.
 
@@ -103,7 +103,7 @@ I use vim not because I think I can type faster in it, but because I have used s
 
 The thing about Vim is that I cannot imagine creating it and thinking, "This will be much faster and easier than a mouse eventually". But, I also wouldn't think that I could learn how to type fast without looking at the keys if I just stumbled across a keyboard, but both are undoubtedly true. Like anything physical, it requires practice and muscle memory. Would you rather go back to looking at every single key to type? That's how vim users feel about regular text editors. Try it out.
 
-> Another great allegory which gets a the heart of the feeling of using vim. It doesn't attempt to convince by proof of efficiency, it simply describes how it feels to vim users.
+> Another great allegory which gets at the heart of the feeling of using vim. It doesn't attempt to convince by proof of efficiency, it simply describes how it feels to vim users.
 
 -----
 
@@ -123,4 +123,4 @@ So, then why ski (vim) at all? Well, it is truly one of the most efficient, fast
 
 I honestly can't take seriously any programmer who doesn't know the basics of vim - doesn't that suggest they've never used sed, less, or read through man pages? Have they never had to ssh to a remote machine in the terminal? I do though get it, when people say "I tried it and ain't for me". I suppose, it just means they've never hit the spot that inspired them to keep going.
 
-> Many people reach for alegories when trying to explian their love for vim. I particularly like that this one emphasises the *fun* aspect of using vim.
+> Many people reach for allegories when trying to explain their love for vim. I particularly like that this one emphasises the *fun* aspect of using vim.
