@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 <description>Recent weblog posts by TonyStr</description>
 <link>https://tonystr.net</link>
 <atom:link href="https://tonystr.net/rss.xml" rel="self" type="application/rss+xml" />
-${items.join()}
+${items.join('')}
 </channel>
 </rss>`;
 });
