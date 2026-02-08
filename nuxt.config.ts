@@ -62,35 +62,31 @@ export default defineNuxtConfig({
 		'@nuxt/image',
 	],
 
-	// hooks: {
-	// 	'content:file:beforeParse': (ctx: any) => {
-	// 		const { file } = ctx;
-	// 		console.log('BEFORE PARSE');
-	//
-	// 		if (file.id.endsWith('.md')) {
-	// 			file.body = file.body.replace(/^\/\*add\*\/(.*)$/gm, '<span class="code-add-line">$1</span>');
-	// 		}
-	// 	}
-	// },
-
 	app: {
 		head: {
+			title: 'TonyStr.net',
 			htmlAttrs: {
 				lang: 'en',
 			},
+			link: [
+				{ rel: "alternate", title: "TonyStr's blog", type: "application/rss+xml", href: "/rss.xml" },
+				{ rel: "icon", type: "image/x-icon", href: "/favicon.ico", },
+				{ rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png", },
+				{ rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png", },
+			],
 			meta: [
 				{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
 				{ name: 'description', content: 'Personal home page of Tony' },
 				{ name: 'robots', content: 'index, follow' },
-				// { name: 'msvalidate.01', content: 'BF3CD10C85056390DBB5884682A1E8DE' },
+				// { name: 'msvalidate.01', content: '' },
 				{ property: 'og:title', content: 'TonyStr.net' },
 				{ property: 'og:description', content: 'Personal home page of Tony' },
 				{ property: 'og:site_name', content: 'TonyStr' },
-				// { property: 'og:image', content: 'https://soundshop.io/banner.png' },
-				// { name: 'twitter:card', content: 'summary_large_image' },
+				// { property: 'og:image', content: '' },
+				// { name: 'twitter:card', content: '' },
 				{ name: 'twitter:title', content: 'TonyStr.net' },
 				{ name: 'twitter:description', content: 'Personal home page of Tony' },
-				// { name: 'twitter:image', content: 'https://soundshop.io/banner.png' },
+				// { name: 'twitter:image', content: '' },
 				{ name: 'msapplication-TileColor', content: '#13121b' },
 				{ name: 'theme-color', content: '#13121b' }
 			]
