@@ -16,24 +16,9 @@ useSeoMeta({
 
 <template>
 	<div class="blog-index-page">
-		<div class="split">
-			<div class="breadcrumbs">
-				<RouterLink to="/">~</RouterLink>
-				<div class="separator">&#47;</div>
-				<RouterLink to="/blog">blog</RouterLink>
-				<div class="separator">&#47;</div>
-			</div>
-			<div class="right">
-				<NuxtLink
-					to="/rss.xml"
-					target="_blank"
-					aria-label="RSS feed"
-					external
-				>
-					[rss]
-				</NuxtLink>
-			</div>
-		</div>
+		<header>
+			<Nav />
+		</header>
 		<h1>Latest posts</h1>
 		<div class="articles">
 			<NuxtLink
@@ -41,7 +26,7 @@ useSeoMeta({
 				:key="article.path"
 				:to="article.path"
 			>
-				<div
+				<article
 					class="article"
 				>
 					<NuxtImg
@@ -97,48 +82,18 @@ useSeoMeta({
 							{{ article.description }}
 						</p>
 					</div>
-				</div>
+				</article>
 			</NuxtLink>
 		</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
-.breadcrumbs {
-	display: flex;
-	align-items: center;
-	gap: .4rem;
-	font-size: 1.04rem;
-	// margin-left: calc((100% - 900px) / 2);
-
-	.back-btn {
-		background-color: transparent;
-		padding: 0;
-	}
-
-	.separator {
-		color: #777;
-	}
-
-	.this-page {
-		color: #aaa;
-	}
-}
-
 .blog-index-page {
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 0 1.6rem;
 	
-	.split {
-		font-size: 1.04rem;
-		margin-top: 2rem;
-
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-center;
-	}
-
 	h1 {
 		font-size: 2.4rem;
 		font-weight: 600;

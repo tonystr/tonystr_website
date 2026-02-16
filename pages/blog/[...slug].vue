@@ -19,35 +19,18 @@ useSeoMeta({
 
 <template>
 	<div class="blog-article-page">
-		<div class="split">
-			<div class="breadcrumbs">
-				<NuxtLink to="/">~</NuxtLink>
-				<div class="separator">&#47;</div>
-				<NuxtLink to="/blog">blog</NuxtLink>
-				<div class="separator">&#47;</div>
-				<div class="this-page">{{ articleSlug }}</div>
-			</div>
-			<div class="right">
-				<div class="meta">
-					<NuxtTime
-						v-if="data?.date"
-						:datetime="data.date"
-						year="numeric"
-						month="short"
-						day="2-digit"
-						class="date"
-					/>
-				</div>
-				<NuxtLink
-					to="/rss.xml"
-					target="_blank"
-					aria-label="RSS feed"
-					external
-				>
-					[rss]
-				</NuxtLink>
-			</div>
-		</div>
+		<Nav>
+			<template v-slot:right>
+				<NuxtTime
+					v-if="data?.date"
+					:datetime="data.date"
+					year="numeric"
+					month="short"
+					day="2-digit"
+					class="date"
+				/>
+			</template>
+		</Nav>
 		<ContentRenderer
 			v-if="data"
 			class="rendered-markdown"
@@ -58,91 +41,23 @@ useSeoMeta({
 			Page not found
 		</div>
 		<footer>
-			<div class="split">
-				<div class="breadcrumbs">
-					<NuxtLink to="/">~</NuxtLink>
-					<div class="separator">&#47;</div>
-					<NuxtLink to="/blog">blog</NuxtLink>
-					<div class="separator">&#47;</div>
-					<div class="this-page">{{ articleSlug }}</div>
-				</div>
-				<div class="right">
-					<div class="meta">
-						<NuxtTime
-							v-if="data?.date"
-							:datetime="data.date"
-							year="numeric"
-							month="short"
-							day="2-digit"
-							class="date"
-						/>
-					</div>
-					<NuxtLink
-						to="/rss.xml"
-						target="_blank"
-						aria-label="RSS feed"
-						external
-					>
-						[rss]
-					</NuxtLink>
-				</div>
-			</div>
+			<Nav>
+				<template v-slot:right>
+					<NuxtTime
+						v-if="data?.date"
+						:datetime="data.date"
+						year="numeric"
+						month="short"
+						day="2-digit"
+						class="date"
+					/>
+				</template>
+			</Nav>
 		</footer>
 	</div>
 </template>
 
 <style scoped lang="scss">
-.blog-article-page .split {
-	font-size: 1.04rem;
-	margin: 0 auto;
-	margin-top: 2rem;
-	max-width: 900px;
-
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-center;
-
-	.right {
-		display: flex;
-		gap: 1.6rem;
-		align-items: center;
-
-		.date {
-			color: #aaa;
-		}
-
-		a {
-			display: block;
-			align-self: center;
-			padding-bottom: 3px;
-		}
-	}
-}
-
-.breadcrumbs {
-	display: flex;
-	align-items: center;
-	gap: .4rem;
-	font-size: 1.04rem;
-
-	@media(max-width: 950px) {
-		margin-left: 1.6rem;
-	}
-
-	.back-btn {
-		background-color: transparent;
-		padding: 0;
-	}
-
-	.separator {
-		color: #777;
-	}
-
-	.this-page {
-		color: #aaa;
-	}
-}
-
 footer {
 	padding-bottom: 7rem;
 	border-top: 2px solid #333;
