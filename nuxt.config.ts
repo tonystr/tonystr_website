@@ -3,8 +3,8 @@ export default defineNuxtConfig({
 
 	$production: {
 		routeRules: {
-			'/blog': { prerender: true, isr: true },
-			'/blog/**': { prerender: true, isr: true },
+			'/blog': { cors: true, prerender: true, isr: true },
+			'/blog/**': { cors: true, prerender: true, isr: true },
 		}
 	},
 	$development: {
