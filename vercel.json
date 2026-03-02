@@ -8,11 +8,11 @@
 			"headers": [
 				{
 					"key": "Access-Control-Allow-Origin",
-					"value": "*",
+					"value": "*"
 				},
 				{
 					"key": "Access-Control-Allow-Origin",
-					"value": "GET, HEAD, OPTIONS",
+					"value": "GET, HEAD, OPTIONS"
 				}
 			]
 		}
