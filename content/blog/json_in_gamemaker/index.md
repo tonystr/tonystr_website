@@ -1,7 +1,8 @@
 ---
 date: 2019-07-02
 description: Learn to efficiently store data for your games
-thumbnail: json.thumbnail.png
+DISABLED_thumbnail: json.thumbnail.png
+emoji: 📦
 ---
 
 # JSON In Gamemaker

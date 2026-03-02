@@ -25,6 +25,7 @@ useSeoMeta({
 				v-for="article in articles"
 				:key="article.path"
 				:to="article.path"
+				class="article-link"
 			>
 				<article
 					class="article"
@@ -35,29 +36,11 @@ useSeoMeta({
 						class="thumbnail"
 						alt=""
 					/>
-					<div v-else class="div no-img">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 26"
-							width="42"
-							height="42"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.6"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<!-- Page outline -->
-							<path d="M4 2h10l6 6v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
-
-							<!-- Folded corner -->
-							<path d="M13 3v5h6" />
-
-							<!-- Text lines -->
-							<line x1="6" y1="12" x2="15" y2="12" />
-							<line x1="6" y1="16" x2="17" y2="16" />
-							<line x1="6" y1="20" x2="14" y2="20" />
-						</svg>
+					<div v-else-if="article.meta.emoji" class="div no-img">
+						{{ article.meta.emoji }}
+					</div>
+					<div v-else class="div no-img no-img-default">
+						📄
 					</div>
 					<div class="right">
 						<div class="top">
@@ -100,13 +83,47 @@ useSeoMeta({
 		margin-top: 4rem;
 	}
 
+	.article-link:nth-child(odd) .article {
+		background-color: #1e1e1e;
+		border-radius: .5rem;
+
+		&:hover {
+			background-color: #2a2a2a;
+		}
+	}
+
+	.article-link:first-child .article {
+		border-top-left-radius: 1rem;
+		border-top-right-radius: 1rem;
+	}
+
+	.article-link:last-child .article {
+		border-bottom-left-radius: 1rem;
+		border-bottom-right-radius: 1rem;
+	}
+
 	.article {
 		position: relative;
-
-		// border-left: 2px solid #333337;
-		// padding-left: 1rem;
-		margin-top: 1.2rem;
 		display: flex;
+		padding: .5rem 1.2rem;
+		margin: .2rem 0;
+		padding-left: .8rem;
+		border-radius: .5rem;
+		transition: outline, opacity, transform .14s;
+
+		&:hover {
+			background-color: #2a2a2a;
+			transform: translateX(.6rem);
+
+			.title {
+				color: #fff !important;
+			}
+		}
+
+		&:active {
+			transform: scale(.98);
+			opacity: .8;
+		}
 
 		.no-img {
 			width: 4rem;
@@ -115,6 +132,8 @@ useSeoMeta({
 			justify-content: center;
 			align-items: center;
 			flex-shrink: 0;
+			color: #7a7a7f;
+			font-size: 2rem;
 		}
 
 		.thumbnail {
@@ -123,6 +142,7 @@ useSeoMeta({
 			border-radius: .5rem;
 			display: block;
 			flex-shrink: 0;
+			transform: scale(.74);
 
 			&.error {
 				opacity: 0;
@@ -147,19 +167,24 @@ useSeoMeta({
 			flex-direction: row;
 			justify-content: space-between;
 			flex-wrap: wrap;
+
+			.title {
+				color: #eee;
+			}
 		}
 
 		.date {
 			padding: 0;
 			margin: 0;
-			color: #aaa;
+			color: #7a7a7a;
 		}
 
 		.summary {
 			font-size: 1.04rem;
 			margin: 0;
 			margin-top: .2rem;
-			color: #aaa;
+			color: #7a7a7a;
+			font-style: italic;
 		};
 	}
 }

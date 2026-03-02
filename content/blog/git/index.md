@@ -1,6 +1,7 @@
 ---
 date: 2026-01-20
 description: Reflections on git show
+emoji: 🗃️ 
 ---
 # On git show
 

@@ -1,6 +1,7 @@
 ---
 date: 2026-01-30
 description: Migrating my website to nuxt
+emoji: 🏗️
 ---
 # Migrating to nuxt
 

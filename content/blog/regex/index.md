@@ -1,7 +1,8 @@
 ---
 title: '/Reg(ul\[ae\]r)?\[\\s_-\]\*Ex(pres{2}ions?|p)?/i'
 date: 2019-07-02
-thumbnail: regex.thumbnail.png
+DISABLED_thumbnail: regex.thumbnail.png
+emoji: 💫
 description: Learn to understand what that title means
 ---
 

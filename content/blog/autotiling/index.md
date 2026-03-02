@@ -1,7 +1,8 @@
 ---
 description: Learn to autotile in code
 date: 2019-09-01
-thumbnail: autotiling.thumbnail.png
+DISABLED_thumbnail: autotiling.thumbnail.png
+emoji: 🧩
 ---
 
 # Autotiling

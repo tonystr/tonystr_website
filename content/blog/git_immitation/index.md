@@ -4,6 +4,7 @@ slug: git_immitation
 description: Implementation and reflections about a git clone
 date: 2026-01-27
 tags: ["git", "programming", "rust"]
+emoji: 🛠️
 ---
 
 # I made my own git

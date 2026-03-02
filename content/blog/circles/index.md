@@ -1,7 +1,8 @@
 ---
 title: Circles
 tags: ["tutorial", "gml", "rendering", "math", "programming"],
-thumbnail: primitive_kinds.png
+DISABLED_thumbnail: primitive_kinds.png
+emoji: ⚪
 description: Program circles and complex shapes with primitives and trigonometry
 date: 2019-04-28
 ---
