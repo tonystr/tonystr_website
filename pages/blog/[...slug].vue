@@ -31,6 +31,14 @@ useSeoMeta({
 				/>
 			</template>
 		</Nav>
+		<div class="banner-wrapper">
+			<img
+				v-if="data?.meta.banner"
+				:src="`/${articleSlug}/${data.meta.banner as string}`"
+				class="article-banner"
+				alt=""
+			>
+		</div>
 		<ContentRenderer
 			v-if="data"
 			class="rendered-markdown"
@@ -96,5 +104,21 @@ footer {
 		font-weight: 800;
 		margin-top: 8rem;
 	}
+}
+
+.banner-wrapper {
+	display: flex;
+
+}
+
+.article-banner {
+	margin: 0 auto;
+	width: 900px;
+	max-height: 13rem;
+	object-fit: cover;
+	object-position: center;
+	margin-top: 2rem;
+	margin-bottom: -2rem;
+	border-radius: 1rem;
 }
 </style>

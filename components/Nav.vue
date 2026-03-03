@@ -15,6 +15,7 @@ const indexPage = route.path.endsWith('/');
 				<div class="separator">&#47;</div>
 				<RouterLink
 					:to="`/${breadcrumbs.slice(0, i + 1).join('/')}`"
+					class="crumb"
 				>
 					{{ crumb }}
 				</RouterLink>
@@ -76,6 +77,7 @@ const indexPage = route.path.endsWith('/');
 	align-items: center;
 	gap: .4rem;
 	font-size: 1.04rem;
+	max-width: 100%;
 
 	.back-btn {
 		background-color: transparent;
@@ -88,6 +90,11 @@ const indexPage = route.path.endsWith('/');
 
 	.this-page {
 		color: #aaa;
+	}
+
+	.crumb:last-child {
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 }
 

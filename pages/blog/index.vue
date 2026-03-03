@@ -78,7 +78,7 @@ useSeoMeta({
 	padding: 0 1.6rem;
 	
 	h1 {
-		font-size: 2.4rem;
+		font-size: 2.2rem;
 		font-weight: 600;
 		margin-top: 4rem;
 	}
@@ -110,6 +110,7 @@ useSeoMeta({
 		padding-left: .8rem;
 		border-radius: .5rem;
 		transition: outline, opacity, transform .14s;
+		align-items: center;
 
 		&:hover {
 			background-color: #2a2a2a;
@@ -157,8 +158,7 @@ useSeoMeta({
 		h2 {
 			margin: 0;
 			margin-right: 1rem;
-			font-size: 1.4rem;
-			font-weight: 400;
+			font-weight: 500;
 		}
 
 		.top {
@@ -170,6 +170,7 @@ useSeoMeta({
 
 			.title {
 				color: #eee;
+				font-size: 1.2rem;
 			}
 		}
 
@@ -180,12 +181,34 @@ useSeoMeta({
 		}
 
 		.summary {
-			font-size: 1.04rem;
+			font-size: 1rem;
 			margin: 0;
 			margin-top: .2rem;
 			color: #7a7a7a;
 			font-style: italic;
 		};
+
+		@media(max-width: 900px) {
+			font-size: .8rem;
+
+			.title {
+				font-size: 1.1rem;
+			}
+
+			.summary {
+				font-size: .8rem;
+				display: none;
+			}
+		}
+	}
+
+	@media(max-width: 900px) {
+		padding: 0 .8rem;
+
+		h1 {
+			font-size: 1.8rem;
+			text-align: center;
+		}
 	}
 }
 </style>
