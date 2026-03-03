@@ -74,6 +74,10 @@ footer {
 	margin-top: 8rem;
 	padding-top: 0rem;
 	height: 1px;
+
+	@media (max-width: 900px) {
+		width: 100%;
+	}
 }
 
 .rendered-markdown {
