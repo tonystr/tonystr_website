@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAsyncData } from 'nuxt/app';
+import Giscus from '@giscus/vue';
 
 const route = useRoute();
 const { data } = await useAsyncData(
@@ -47,6 +48,23 @@ useSeoMeta({
 		<div v-else class="page-not-found">
 			<div class="code-404">404</div>
 			Page not found
+		</div>
+		<div class="comments">
+			<Giscus
+				id="giscus-comments"
+				repo="tonystr/tonystr_website"
+				repoId="MDEwOlJlcG9zaXRvcnkzMjI5MzQyODA="
+				category="Announcements"
+				categoryId="DIC_kwDOEz-WCM4C4Odj"
+				mapping="pathname"
+				term="this is the term"
+				reactionsEnabled="1"
+				emitMetadata="0"
+				inputPosition="top"
+				theme="dark"
+				lang="en"
+				loading="lazy"
+			/>
 		</div>
 		<footer>
 			<Nav>
@@ -124,5 +142,17 @@ footer {
 	margin-top: 2rem;
 	margin-bottom: -2rem;
 	border-radius: 1rem;
+}
+
+.comments {
+	display: flex;
+	justify-content: center;
+	margin-top: 3rem;
+}
+
+:deep(#giscus-comments) {
+	max-width: 900px;
+	margin: 0 auto;
+	display: inline-block;
 }
 </style>
