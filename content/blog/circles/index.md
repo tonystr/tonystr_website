@@ -5,6 +5,7 @@ DISABLED_thumbnail: primitive_kinds.png
 emoji: ⚪
 description: Program circles and complex shapes with primitives and trigonometry
 date: 2019-04-28
+ai_grade: AA
 ---
 
 # Circles!

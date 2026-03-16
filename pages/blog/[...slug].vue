@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AIUsageGrade from '/components/AIUsageGrade.vue';
 import { useAsyncData } from 'nuxt/app';
 
 const route = useRoute();
@@ -21,6 +22,11 @@ useSeoMeta({
 	<div class="blog-article-page">
 		<Nav>
 			<template v-slot:right>
+				<AIUsageGrade
+					v-if="data?.meta.ai_grade"
+					class="aiug-grade"
+					:grade="data?.meta.ai_grade as string"
+				/>
 				<NuxtTime
 					v-if="data?.date"
 					:datetime="data.date"
@@ -51,6 +57,11 @@ useSeoMeta({
 		<footer>
 			<Nav>
 				<template v-slot:right>
+					<AIUsageGrade
+						v-if="data?.meta.ai_grade"
+						class="aiug-grade"
+						:grade="data?.meta.ai_grade as string"
+					/>
 					<NuxtTime
 						v-if="data?.date"
 						:datetime="data.date"

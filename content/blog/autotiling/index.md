@@ -3,6 +3,7 @@ description: Learn to autotile in code
 date: 2019-09-01
 DISABLED_thumbnail: autotiling.thumbnail.png
 emoji: 🧩
+ai_grade: AA
 ---
 
 # Autotiling

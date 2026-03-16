@@ -2,6 +2,7 @@
 date: 2026-02-23
 description: I argue that numbers can be thought of as a form of compression
 emoji: 🗜️
+ai_grade: AA-E
 ---
 # Numbers are compression
 

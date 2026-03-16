@@ -2,6 +2,7 @@
 date: 2026-01-20
 description: Reflections on git show
 emoji: 🗃️ 
+ai_grade: AA
 ---
 # On git show
 

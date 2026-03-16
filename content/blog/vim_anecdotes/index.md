@@ -2,6 +2,7 @@
 date: 2026-02-03
 description: A collections of vim anecdotes from the internet
 emoji: 📜
+ai_grade: AA
 ---
 # Vim anecdotes
 

@@ -5,6 +5,7 @@ description: Implementation and reflections about a git clone
 date: 2026-01-27
 tags: ["git", "programming", "rust"]
 emoji: 🛠️
+ai_grade: AA
 ---
 
 # I made my own git
