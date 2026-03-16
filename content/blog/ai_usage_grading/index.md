@@ -1,6 +1,8 @@
 ---
-ai_grade: AA
 date: 2026-03-16
+description: I present a system for communicating how AI is used in articles
+emoji: ⚖️
+ai_grade: AA
 ---
 # AI Usage Grading
 
