@@ -28,6 +28,8 @@ export default defineNuxtConfig({
 						'typescript',
 						'ts',
 						'bash',
+						'sh',
+						'shell',
 						'markdown',
 						'json',
 						'java',
