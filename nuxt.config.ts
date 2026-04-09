@@ -30,6 +30,7 @@ export default defineNuxtConfig({
 						'bash',
 						'markdown',
 						'json',
+						'java',
 						'c',
 						'cs',
 					],
