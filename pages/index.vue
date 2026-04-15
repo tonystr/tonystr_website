@@ -40,11 +40,11 @@ useSeoMeta({
 <template>
 	<div class="home">
 		<nav class="floating-nav">
-			<div class="separator">·</div>
+			<div class="separator" role="presentation" aria-hidden="true">·</div>
 			<NuxtLink to="./blog">blog</NuxtLink>
-			<div class="separator">·</div>
+			<div class="separator" role="presentation" aria-hidden="true">·</div>
 			<NuxtLink to="https://github.com/tonystr">github</NuxtLink>
-			<div class="separator">·</div>
+			<div class="separator" role="presentation" aria-hidden="true">·</div>
 		</nav>
 		<div class="planet-container">
 			<h1 class="main-heading">
@@ -71,10 +71,10 @@ useSeoMeta({
 			ref="cursorBlob"
 		/>
 		<div class="blur-bg" />
-		<div class="plus-tl">+</div>
-		<div class="plus-bl">+</div>
-		<div class="plus-tr">+</div>
-		<div class="plus-br">+</div>
+		<div class="plus-tl" role="presentation" aria-hidden="true">+</div>
+		<div class="plus-bl" role="presentation" aria-hidden="true">+</div>
+		<div class="plus-tr" role="presentation" aria-hidden="true">+</div>
+		<div class="plus-br" role="presentation" aria-hidden="true">+</div>
 	</div>
 </template>
 
@@ -144,6 +144,7 @@ $glow_color: #18141f;
 
 	.separator {
 		color: #777;
+		user-select: none;
 	}
 }
 

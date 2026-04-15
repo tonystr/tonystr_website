@@ -12,7 +12,7 @@ const indexPage = route.path.endsWith('/');
 				v-for="(crumb, i) in breadcrumbs"
 				:key="i"
 			>
-				<div class="separator">&#47;</div>
+				<div class="separator" aria-hidden="true" role="presentation" />
 				<RouterLink
 					:to="`/${breadcrumbs.slice(0, i + 1).join('/')}`"
 					class="crumb"
@@ -20,9 +20,7 @@ const indexPage = route.path.endsWith('/');
 					{{ crumb }}
 				</RouterLink>
 			</template>
-			<div v-if="indexPage" class="separator">&#47;</div>
-			<!-- <RouterLink to="/blog">blog</RouterLink> -->
-			<!-- <div class="separator">&#47;</div> -->
+			<div v-if="indexPage" class="separator" aria-hidden="true" role="presentation" />
 		</div>
 		<div class="right">
 			<slot name="right" />
@@ -84,8 +82,10 @@ const indexPage = route.path.endsWith('/');
 		padding: 0;
 	}
 
-	.separator {
+	.separator::before {
+		content: '/';
 		color: #777;
+		user-select: none;
 	}
 
 	.this-page {
