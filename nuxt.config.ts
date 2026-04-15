@@ -14,6 +14,11 @@ export default defineNuxtConfig({
 		}
 	},
 
+	site: {
+		url: 'https://tonystr.net',
+		name: 'TonyStr.net'
+	},
+
 	content: {
 		// This is needed for hosting on vercel!!!
 		experimental: { sqliteConnector: 'native' },
@@ -59,11 +64,7 @@ export default defineNuxtConfig({
 		'~/assets/fonts/inter.css'
 	],
 
-	modules: [
-		'@pinia/nuxt',
-		'@nuxt/content',
-		'@nuxt/image',
-	],
+	modules: ['@pinia/nuxt', '@nuxt/content', '@nuxt/image', '@nuxtjs/sitemap'],
 
 	app: {
 		head: {
