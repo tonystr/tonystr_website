@@ -12,10 +12,31 @@ const { data } = await useAsyncData(
 
 const articleSlug = computed(() => route.params.slug?.[0]);
 
+function handleKeypress(e: KeyboardEvent) {
+	if (e.ctrlKey || e.metaKey || e.altKey) {
+		return;
+	}
+
+	switch (e.key) {
+		case 'b':
+		case '-':
+			navigateTo('/blog');
+			break;
+
+		case 'h':
+		case '~':
+			navigateTo('/');
+			break;
+	}
+}
+
 useSeoMeta({
 	title: `${data.value?.title} | TonyStr's blog`,
 	description: data.value?.description,
 });
+
+onMounted(() => { document.body.addEventListener('keydown', handleKeypress); });
+onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress); });
 </script>
 
 <template>

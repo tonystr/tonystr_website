@@ -21,15 +21,33 @@ watch(cursorBlob, (cursorBlob) => {
 	});
 });
 
+function handleKeypress(e: KeyboardEvent) {
+	if (e.ctrlKey || e.metaKey || e.altKey) {
+		return;
+	}
+
+	switch (e.key) {
+		case 'b':
+			navigateTo('/blog');
+			break;
+
+		case 'g':
+			navigateTo('https://github.com/tonystr', { external: true });
+			break;
+	}
+}
+
 onMounted(() => {
 	document.body.style.overflow = 'hidden';
 	document.body.style.width = '100vw';
 	document.body.style.height = '100vh';
+	document.body.addEventListener('keydown', handleKeypress);
 });
 onUnmounted(() => {
 	document.body.style.overflow = '';
 	document.body.style.width = '';
 	document.body.style.height = '';
+	document.body.removeEventListener('keydown', handleKeypress);
 });
 
 useSeoMeta({

@@ -8,10 +8,58 @@ const { data: articles } = await useAsyncData(
 		.all(),
 );
 
+const keyboardSelected = ref(-1);
+
+function handleKeypress(e: KeyboardEvent) {
+	if (/^\d$/.test(e.key)) {
+		// TODO: Clamp this
+		keyboardSelected.value = +e.key - 1;
+		return;
+	}
+
+	if (e.ctrlKey || e.metaKey || e.altKey) {
+		return;
+	}
+
+	switch (e.key) {
+		case 'j':
+		case 'Down':
+			if (articles.value && keyboardSelected.value < articles.value.length - 1) { 
+				keyboardSelected.value += 1;
+			}
+			break;
+
+		case 'k':
+		case 'Up':
+			if (keyboardSelected.value >= 0) {
+				keyboardSelected.value -= 1;
+			}
+			break;
+
+		case 'Enter':
+		case 'o':
+		case 'l':
+			const article = articles.value?.at(keyboardSelected.value);
+			if (article) {
+				navigateTo(article.path);
+			}
+			break;
+
+		case 'h':
+		case '~':
+		case '-':
+			navigateTo('/');
+			break;
+	}
+}
+
 useSeoMeta({
 	title: 'TonyStr\'s blog',
 	description: 'Latest posts from TonyStr. Subscribe on RSS',
 });
+
+onMounted(() => { document.body.addEventListener('keydown', handleKeypress); });
+onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress); });
 </script>
 
 <template>
@@ -19,13 +67,17 @@ useSeoMeta({
 		<header>
 			<Nav />
 		</header>
+		<p class="keyboard-hint">
+			Navigate with <code>j</code>/<code>k</code> or <code>Up</code>/<code>Down</code>. Open page with <code>Enter</code>/<code>o</code>/<code>l</code>. Go back with <code>-.</code> Return to home page with <code>h</code>/<code>~</code>.
+		</p>
 		<h1>Latest posts</h1>
 		<div class="articles">
 			<NuxtLink
-				v-for="article in articles"
+				v-for="(article, i) in articles"
 				:key="article.path"
 				:to="article.path"
 				class="article-link"
+				:class="{ 'keyboard-select': keyboardSelected === i }"
 			>
 				<article
 					class="article"
@@ -76,11 +128,29 @@ useSeoMeta({
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 0 1.6rem;
+
+	.keyboard-hint {
+		font-style: italic;
+		color: #8a8a8a;
+		margin-top: 4rem;
+
+		code {
+			background-color: #3e3e3e;
+			color: #bbc;
+			padding: 1px 4px;
+			margin: 0 1px;
+			border-radius: 6px;
+		}
+
+		@media (max-width: 800px) {
+			display: none;
+		}
+	}
 	
 	h1 {
 		font-size: 2.2rem;
 		font-weight: 600;
-		margin-top: 4rem;
+		margin-top: 2rem;
 	}
 
 	.article-link:nth-child(odd) .article {
@@ -100,6 +170,10 @@ useSeoMeta({
 	.article-link:last-child .article {
 		border-bottom-left-radius: 1rem;
 		border-bottom-right-radius: 1rem;
+	}
+
+	.article-link.keyboard-select .article {
+		background-color: #3d3c40;
 	}
 
 	.article {

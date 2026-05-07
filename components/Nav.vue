@@ -45,7 +45,7 @@ const indexPage = route.path.endsWith('/');
 
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-center;
+	align-items: center;
 	flex-wrap: wrap;
 
 	@media(max-width: 950px) {
