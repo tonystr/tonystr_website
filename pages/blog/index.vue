@@ -86,7 +86,7 @@ useJsonld(() => ({
 		headline: article.title ?? article.path,
 		url: `https://tonystr.net${article.path}`,
 		datePublished: toIsoDate(article.date),
-		description: article.description ?? `Read ${article.title ?? 'this post'} on TonyStr's blog.`,
+		description: article.description ?? `Read ${article.title ?? 'this post'} on TonyStr\'s blog.`,
 	})),
 }));
 
