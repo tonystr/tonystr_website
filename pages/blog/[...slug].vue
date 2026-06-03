@@ -35,6 +35,22 @@ useSeoMeta({
 	description: data.value?.description,
 });
 
+useJsonld({
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: data.value?.title,
+	datePublished: data.value?.date,
+	description: data.value?.description,
+	author: {
+		'@type': 'Person',
+		name: 'Tony Strømsnæs'
+	},
+	publisher: {
+		'@type': 'Person',
+		name: 'Tony Strømsnæs'
+	},
+});
+
 onMounted(() => { document.body.addEventListener('keydown', handleKeypress); });
 onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress); });
 </script>
