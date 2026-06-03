@@ -53,6 +53,20 @@ onUnmounted(() => {
 useSeoMeta({
 	title: 'TonyStr.net',
 });
+
+useJsonld({
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'TonyStr.net',
+	url: 'https://tonystr.net/',
+	author: {
+		'@type': 'Person',
+		name: 'Tony Strømsnæs',
+	},
+	sameAs: [
+		'https://github.com/tonystr',
+	],
+});
 </script>
 
 <template>

@@ -58,6 +58,25 @@ useSeoMeta({
 	description: 'Latest posts from TonyStr. Subscribe on RSS',
 });
 
+useJsonld(() => ({
+	'@context': 'https://schema.org',
+	'@type': 'Blog',
+	name: 'TonyStr\'s blog',
+	description: 'Latest posts from TonyStr. Subscribe on RSS',
+	url: 'https://tonystr.net/blog',
+	author: {
+		'@type': 'Person',
+		name: 'Tony Strømsnæs',
+	},
+	blogPost: (articles.value ?? []).map((article) => ({
+		'@type': 'BlogPosting',
+		headline: article.title ?? article.path,
+		url: `https://tonystr.net${article.path}`,
+		datePublished: article.date,
+		description: article.description,
+	})),
+}));
+
 onMounted(() => { document.body.addEventListener('keydown', handleKeypress); });
 onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress); });
 </script>
