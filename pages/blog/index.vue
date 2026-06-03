@@ -10,6 +10,19 @@ const { data: articles } = await useAsyncData(
 
 const keyboardSelected = ref(-1);
 
+function toIsoDate(value: string | Date | undefined) {
+	if (!value) {
+		return undefined;
+	}
+
+	const date = new Date(value);
+	if (Number.isNaN(date.getTime())) {
+		return undefined;
+	}
+
+	return date.toISOString();
+}
+
 function handleKeypress(e: KeyboardEvent) {
 	if (/^\d$/.test(e.key)) {
 		// TODO: Clamp this
@@ -72,8 +85,8 @@ useJsonld(() => ({
 		'@type': 'BlogPosting',
 		headline: article.title ?? article.path,
 		url: `https://tonystr.net${article.path}`,
-		datePublished: article.date,
-		description: article.description,
+		datePublished: toIsoDate(article.date),
+		description: article.description ?? `Read ${article.title ?? 'this post'} on TonyStr's blog.`,
 	})),
 }));
 
