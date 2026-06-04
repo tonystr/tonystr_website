@@ -9,6 +9,7 @@ const { data } = await useAsyncData(
 		.path(route.path)
 		.first()
 );
+console.log("data", data)
 
 const articleSlug = computed(() => route.params.slug?.[0]);
 
@@ -56,7 +57,10 @@ onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress)
 </script>
 
 <template>
-	<div class="blog-article-page">
+	<div
+		class="blog-article-page"
+		:class="{ 'underline-links': !!data?.meta?.underline }"
+	>
 		<Nav>
 			<template v-slot:right>
 				<AIUsageGrade
@@ -114,6 +118,10 @@ onUnmounted(() => { document.body.removeEventListener('keydown', handleKeypress)
 </template>
 
 <style scoped lang="scss">
+.underline-links .rendered-markdown :deep(a) {
+	text-decoration: underline !important;
+}
+
 footer {
 	padding-bottom: 7rem;
 	border-top: 2px solid #333;

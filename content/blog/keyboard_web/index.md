@@ -3,6 +3,7 @@ date: 2026-06-03
 description: What if the web was keyboard-compatible
 ai_grade: AA
 emoji: ⌨️
+tags: ['web', 'keyboard', 'productivity', 'ux']
 ---
 # Keyboard-centric web
 
