@@ -42,3 +42,5 @@ __screenshots__/
 .nitro
 .cache
 dist
+.vercel
+.env*.local

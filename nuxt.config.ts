@@ -64,7 +64,13 @@ export default defineNuxtConfig({
 		'~/assets/fonts/inter.css'
 	],
 
-	modules: ['@pinia/nuxt', '@nuxt/content', '@nuxt/image', '@nuxtjs/sitemap'],
+	modules: [
+		'@pinia/nuxt',
+		'@nuxt/content',
+		'@nuxt/image',
+		'@nuxtjs/sitemap',
+		'nuxt-jsonld',
+	],
 
 	app: {
 		head: {
