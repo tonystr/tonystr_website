@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
 	const items = articles.map(article => `<item>
 <title>${article.title}</title>
-<link>https://tonystr.net/${article.path}</link>
+<link>https://tonystr.net${article.path}</link>
 <guid isPermaLink="true">https://tonystr.net${article.path}</guid>
 <description>${article.description}</description>
 <pubDate>${formatDate(article.date)}</pubDate>
